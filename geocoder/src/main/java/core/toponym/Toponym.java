@@ -1,4 +1,4 @@
-package core;
+package core.toponym;
 
 import java.util.List;
 

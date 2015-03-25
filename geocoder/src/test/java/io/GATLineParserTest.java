@@ -1,9 +1,12 @@
 package io;
 
-import core.Toponym;
-import core.Tweet;
+import core.toponym.Toponym;
+import core.document.tweet.Tweet;
 import java.text.ParseException;
 import java.util.List;
+
+import io.CSV.CsvLineParser;
+import io.CSV.GAT.GATLineParser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +29,7 @@ public class GATLineParserTest {
 	public void testMessageGetsParsedCorrectly() throws ParseException {
 		CsvLineParser parser = new GATLineParser();
 		Tweet tweet = parser.parse("#Peace #Love #happynewyear  @ Green Hall http://t.co/jmmsOx07	tp{Green Hall[-19,-48]}tp	-18.92382498	-48.31919061	 - MG, Brasil	Brasilia	Check it out!");
-		assertEquals("#Peace #Love #happynewyear  @ Green Hall http://t.co/jmmsOx07", tweet.getMessage());
+		assertEquals("#Peace #Love #happynewyear  @ Green Hall http://t.co/jmmsOx07", tweet.getText());
 	}
 
 	@Test

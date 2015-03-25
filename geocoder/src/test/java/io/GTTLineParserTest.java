@@ -2,13 +2,13 @@ package io;
 
 import java.text.ParseException;
 
-import io.GTTLineParser;
-import io.CsvLineParser;
+import io.CSV.GTT.GTTLineParser;
+import io.CSV.CsvLineParser;
 import static org.junit.Assert.*;
 
 import org.junit.*;
 
-import core.Tweet;
+import core.document.tweet.Tweet;
 
 public class GTTLineParserTest {
 
@@ -50,6 +50,6 @@ public class GTTLineParserTest {
 	public void testMessageGetsCorrectlyParsed() throws ParseException {
 		CsvLineParser parser = new GTTLineParser();
 		Tweet tweet = parser.parse("USER_79321756	2010-03-03T04:15:26	�T: 47.528139,-122.197916	47.528139	-122.197916	message");
-		assertEquals("message", tweet.getMessage());
+		assertEquals("message", tweet.getText());
 	}
 }

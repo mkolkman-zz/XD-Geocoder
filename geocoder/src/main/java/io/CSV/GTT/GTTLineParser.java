@@ -1,9 +1,11 @@
-package io;
+package io.CSV.GTT;
 
 import java.text.ParseException;
 
-import core.Tweet;
+import core.document.tweet.Tweet;
 import core.geo.Coordinate;
+import io.CSV.CsvLineParser;
+
 /**
  * Parses String input to Tweet for the GTT corpus 
  * 
@@ -28,7 +30,7 @@ public class GTTLineParser implements CsvLineParser {
 			tweet.setUser(parts[0]);
 			tweet.setDate(parts[1]);
 			tweet.setGeotag(new Coordinate(parts[3], parts[4]));
-			tweet.setMessage(parts[5]);
+			tweet.setText(parts[5]);
 			
 			return tweet;
 		}catch(NumberFormatException e){

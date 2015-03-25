@@ -1,9 +1,9 @@
-package io;
+package io.TGN;
 
 import java.io.PrintWriter;
 import java.util.List;
 
-import core.Tweet;
+import core.document.tweet.Tweet;
 
 public class TgnCorpusWriter {	
 	
@@ -17,7 +17,7 @@ public class TgnCorpusWriter {
 	
 	public void writeFile() {
 		for(Tweet t : tweets) {
-			writer.println(t.getTgnMessage());
+			writer.println(t.getTgnText());
 		}
 		writer.close();
 	}

@@ -1,4 +1,4 @@
-package core;
+package core.document.tweet;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,27 +6,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import core.document.Document;
+import core.toponym.Toponym;
 import core.geo.Coordinate;
 
-public class Tweet {
+public class Tweet extends Document {
 
 	private String user;
-	private String message;	
-	private String tgnMessage;
+	private String text;
+	private String tgnText;
 	private long date;
 	private Coordinate geotag;
 	private List<Toponym> toponyms = new ArrayList<Toponym>();
 	
-	public String getMessage() {
-		return message;
+	public String getText() {
+		return text;
 	}
 	
-	public void setMessage(String message) {
-		this.message = message;
+	public void setText(String text) {
+		this.text = text;
 	}
 
-	public String getTgnMessage() {
-		return tgnMessage;
+	public String getTgnText() {
+		return tgnText;
 	}
 	
 	public Coordinate getGeotag() {
@@ -47,7 +49,7 @@ public class Tweet {
 	}
 
 	private void buildTgnMessage() {
-		tgnMessage = message;
+		tgnText = text;
 		for(Toponym t : this.toponyms) {
 			addTagToEachToponymOccurenceInTweetText(t.getGeonamesIds(), t.getText());
 		}
@@ -57,7 +59,7 @@ public class Tweet {
 		if(geonamesIds != null && geonamesIds.size() > 0){
 			String geonamesId = geonamesIds.get(0);
 			String replacement = "tgn," + geonamesId + "-" + toponymText + "-]]";
-			tgnMessage = tgnMessage.replaceAll(toponymText, replacement);		
+			tgnText = tgnText.replaceAll(toponymText, replacement);
 		}
 	}
 

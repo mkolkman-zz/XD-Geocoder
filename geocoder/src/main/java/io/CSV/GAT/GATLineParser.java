@@ -1,13 +1,13 @@
-package io;
+package io.CSV.GAT;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import core.Toponym;
-import core.Tweet;
+import core.toponym.Toponym;
+import core.document.tweet.Tweet;
 import core.geo.Coordinate;
+import io.CSV.CsvLineParser;
 
 public class GATLineParser implements CsvLineParser {
 
@@ -23,7 +23,7 @@ public class GATLineParser implements CsvLineParser {
 			throw new ParseException("Tabs per line. Expected: " + TABS_PER_LINE + ". Actual: " + parts.length, 0);		
 		
 		Tweet tweet = new Tweet();		
-		tweet.setMessage(parts[0]);
+		tweet.setText(parts[0]);
 		tweet.setToponyms(parseToponyms(parts[1]));
 		tweet.setGeotag(new Coordinate(parts[2], parts[3]));
 		
