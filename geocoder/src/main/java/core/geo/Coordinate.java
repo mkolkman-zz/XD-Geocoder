@@ -23,5 +23,9 @@ public class Coordinate {
 	public float getLongitude() {
 		return longitude;
 	}
+
+	public String toString() {
+		return latitude + "," + longitude;
+	}
 	
 }

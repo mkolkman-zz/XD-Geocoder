@@ -1,10 +1,10 @@
-package io.CSV.GTT;
+package io.csv.gtt;
 
 import java.text.ParseException;
 
 import core.document.tweet.Tweet;
 import core.geo.Coordinate;
-import io.CSV.CsvLineParser;
+import io.csv.CsvLineParser;
 
 /**
  * Parses String input to Tweet for the GTT corpus 

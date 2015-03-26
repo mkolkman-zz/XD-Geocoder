@@ -2,13 +2,14 @@ package core.document;
 
 import core.toponym.Toponym;
 
+import java.util.ArrayList;
 import java.util.List;
 
 abstract public class Document {
 
     protected String text;
 
-    protected List<Toponym> toponyms;
+    protected List<Toponym> toponyms = new ArrayList<Toponym>();
 
     public void setText(String text) {
         this.text = text;
@@ -24,6 +25,18 @@ abstract public class Document {
 
     public List<Toponym> getToponyms() {
         return toponyms;
+    }
+
+    public int getToponymCount() {
+        return toponyms.size();
+    }
+
+    public int getGeonamesIdCount() {
+        int count = 0;
+        for (Toponym toponym : toponyms) {
+            count+= toponym.getGeonamesIdCount();
+        }
+        return count;
     }
 
 }

@@ -1,4 +1,4 @@
-package io.CSV.GAT;
+package io.csv.gat;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 import core.toponym.Toponym;
 import core.document.tweet.Tweet;
 import core.geo.Coordinate;
-import io.CSV.CsvLineParser;
+import io.csv.CsvLineParser;
 
 public class GATLineParser implements CsvLineParser {
 

@@ -1,12 +1,12 @@
-package io;
+package io.csv.gat;
 
 import core.toponym.Toponym;
 import core.document.tweet.Tweet;
 import java.text.ParseException;
 import java.util.List;
 
-import io.CSV.CsvLineParser;
-import io.CSV.GAT.GATLineParser;
+import io.csv.CsvLineParser;
+import io.csv.gat.GATLineParser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

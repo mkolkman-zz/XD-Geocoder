@@ -2,10 +2,8 @@ package app;
 
 import core.document.DocumentRepository;
 import core.document.tweet.TweetRepository;
-import io.CSV.CsvCorpusReader;
-import io.CSV.CsvLineParser;
-import io.CorpusReader;
-import io.TGN.TgnCorpusWriter;
+import io.csv.CsvCorpusReader;
+import io.csv.CsvLineParser;
 
 import java.io.*;
 import java.util.Arrays;

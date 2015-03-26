@@ -1,9 +1,9 @@
-package io;
+package io.csv.gtt;
 
 import java.text.ParseException;
 
-import io.CSV.GTT.GTTLineParser;
-import io.CSV.CsvLineParser;
+import io.csv.gtt.GTTLineParser;
+import io.csv.CsvLineParser;
 import static org.junit.Assert.*;
 
 import org.junit.*;

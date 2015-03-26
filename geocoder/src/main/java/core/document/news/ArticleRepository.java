@@ -1,50 +1,52 @@
-package core.document.tweet;
+package core.document.news;
 
 import core.document.DocumentRepository;
-import core.toponym.Toponym;
 import io.CorpusReader;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TweetRepository implements DocumentRepository {
+public class ArticleRepository implements DocumentRepository {
 
-    private List<Tweet> tweets = new ArrayList<Tweet>();
-    private CorpusReader corpusReader;
+    private final CorpusReader corpusReader;
+    private List<Article> articles = new ArrayList<Article>();
 
-    public TweetRepository(CorpusReader corpusReader) {
+    public ArticleRepository(CorpusReader corpusReader) {
         this.corpusReader = corpusReader;
     }
 
+    @Override
     public void loadDocuments() {
         try {
-            while (corpusReader.hasNextDocument()) {
-                tweets.add((Tweet) corpusReader.getNextDocument());
+            while(corpusReader.hasNextDocument()) {
+                articles.add((Article) corpusReader.getNextDocument());
             }
         } catch (ParseException e) {
             System.err.println("Incorrect input format detected. Please check your input file.");
         }
     }
 
+    @Override
     public int getDocumentCount() {
-        return tweets.size();
+        return articles.size();
     }
 
+    @Override
     public int getToponymCount() {
         int count = 0;
-        for (Tweet t : tweets) {
-            count += t.getToponymCount();
+        for (Article article : articles) {
+            count+= article.getToponymCount();
         }
         return count;
     }
 
+    @Override
     public int getGeonamesIdCount() {
         int count = 0;
-        for (Tweet t : tweets) {
-            count += t.getGeonamesIdCount();
+        for(Article article : articles) {
+            article.getGeonamesIdCount();
         }
         return count;
     }
-
 }

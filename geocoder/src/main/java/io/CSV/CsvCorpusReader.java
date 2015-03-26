@@ -1,15 +1,11 @@
-package io.CSV;
+package io.csv;
 
 import java.io.*;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
 import core.document.Document;
-import core.toponym.Toponym;
-import core.document.tweet.Tweet;
-import io.CSV.GAT.GATLineParser;
-import io.CSV.GTT.GTTLineParser;
+import io.csv.gat.GATLineParser;
+import io.csv.gtt.GTTLineParser;
 import io.CorpusReader;
 
 public class CsvCorpusReader implements CorpusReader {

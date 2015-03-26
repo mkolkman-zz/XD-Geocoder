@@ -1,4 +1,4 @@
-package io.CSV;
+package io.csv;
 
 import java.text.ParseException;
 

@@ -1,4 +1,4 @@
-package io.TGN;
+package io.tgn;
 
 import java.io.PrintWriter;
 import java.util.List;
