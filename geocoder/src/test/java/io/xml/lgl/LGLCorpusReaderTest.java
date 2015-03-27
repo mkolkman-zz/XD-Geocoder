@@ -1,6 +1,5 @@
 package io.xml.lgl;
 
-import core.document.Document;
 import core.document.news.Article;
 import core.toponym.Toponym;
 import io.CorpusReader;
@@ -11,6 +10,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 
 import javax.xml.stream.XMLStreamException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
@@ -18,8 +18,8 @@ import java.util.List;
 
 public class LGLCorpusReaderTest extends TestCase {
 
-    public static final String LGL_SINGLE_ARTICLE_TEST_FILE = "D:\\Users\\s0201154\\workspace\\XD-Geocoder\\geocoder\\src\\test\\resources\\xml\\lgl\\lgl-single-article-test.xml";
-    private static final String LGL_MULTIPLE_ARTICLES_TEST_FILE = "D:\\Users\\s0201154\\workspace\\XD-Geocoder\\geocoder\\src\\test\\resources\\xml\\lgl\\lgl-multiple-articles-test.xml";
+    private static final String LGL_SINGLE_ARTICLE_TEST_FILE = new File("").getAbsolutePath() + "\\geocoder\\src\\test\\resources\\xml\\lgl\\lgl-single-article-test.xml";
+    private static final String LGL_MULTIPLE_ARTICLES_TEST_FILE = new File("").getAbsolutePath() + "\\geocoder\\src\\test\\resources\\xml\\lgl\\lgl-multiple-articles-test.xml";
 
     @Test
     public void testConstructor() throws FileNotFoundException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
