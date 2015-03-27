@@ -1,15 +1,14 @@
 package io.xml.lgl;
 
-import core.document.Document;
-import core.document.news.Article;
+import core.language.document.Document;
+import core.language.document.news.Article;
 import core.geo.Coordinate;
-import core.toponym.Toponym;
+import core.language.toponym.Toponym;
 import io.CorpusReader;
 import io.xml.XMLStreamReader;
 
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.XMLEvent;
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;

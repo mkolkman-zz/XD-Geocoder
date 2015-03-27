@@ -1,4 +1,4 @@
-package core.document;
+package core.language.document;
 
 public interface DocumentRepository {
 

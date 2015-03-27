@@ -2,7 +2,7 @@ package io.csv.gtt;
 
 import java.text.ParseException;
 
-import core.document.tweet.Tweet;
+import core.language.document.tweet.Tweet;
 import core.geo.Coordinate;
 import io.csv.CsvLineParser;
 

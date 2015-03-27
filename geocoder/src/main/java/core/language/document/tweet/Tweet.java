@@ -1,4 +1,4 @@
-package core.document.tweet;
+package core.language.document.tweet;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import core.document.Document;
-import core.toponym.Toponym;
+import core.language.document.Document;
+import core.language.toponym.Toponym;
 import core.geo.Coordinate;
 
 public class Tweet extends Document {

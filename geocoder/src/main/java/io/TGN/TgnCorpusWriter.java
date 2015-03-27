@@ -3,7 +3,7 @@ package io.tgn;
 import java.io.PrintWriter;
 import java.util.List;
 
-import core.document.tweet.Tweet;
+import core.language.document.tweet.Tweet;
 
 public class TgnCorpusWriter {	
 	

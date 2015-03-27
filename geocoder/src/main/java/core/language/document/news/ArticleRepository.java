@@ -1,6 +1,6 @@
-package core.document.news;
+package core.language.document.news;
 
-import core.document.DocumentRepository;
+import core.language.document.DocumentRepository;
 import io.CorpusReader;
 
 import java.text.ParseException;

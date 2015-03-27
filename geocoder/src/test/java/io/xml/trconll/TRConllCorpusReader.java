@@ -1,6 +1,6 @@
 package io.xml.trconll;
 
-import core.document.Document;
+import core.language.document.Document;
 import io.CorpusReader;
 import io.xml.XMLStreamReader;
 

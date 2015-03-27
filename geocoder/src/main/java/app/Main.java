@@ -1,7 +1,7 @@
 package app;
 
-import core.document.DocumentRepository;
-import core.document.tweet.TweetRepository;
+import core.language.document.DocumentRepository;
+import core.language.document.tweet.TweetRepository;
 import io.csv.CsvCorpusReader;
 import io.csv.CsvLineParser;
 

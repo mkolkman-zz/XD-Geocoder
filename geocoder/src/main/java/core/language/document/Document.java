@@ -1,6 +1,6 @@
-package core.document;
+package core.language.document;
 
-import core.toponym.Toponym;
+import core.language.toponym.Toponym;
 
 import java.util.ArrayList;
 import java.util.List;

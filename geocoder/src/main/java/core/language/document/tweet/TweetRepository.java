@@ -1,7 +1,6 @@
-package core.document.tweet;
+package core.language.document.tweet;
 
-import core.document.DocumentRepository;
-import core.toponym.Toponym;
+import core.language.document.DocumentRepository;
 import io.CorpusReader;
 
 import java.text.ParseException;

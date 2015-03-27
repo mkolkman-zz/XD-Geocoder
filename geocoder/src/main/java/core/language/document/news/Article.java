@@ -1,6 +1,6 @@
-package core.document.news;
+package core.language.document.news;
 
-import core.document.Document;
+import core.language.document.Document;
 
 import java.sql.Date;
 

@@ -3,7 +3,7 @@ package io.csv;
 import java.io.*;
 import java.text.ParseException;
 
-import core.document.Document;
+import core.language.document.Document;
 import io.csv.gat.GATLineParser;
 import io.csv.gtt.GTTLineParser;
 import io.CorpusReader;

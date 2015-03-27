@@ -1,7 +1,7 @@
 package io.xml.lgl;
 
-import core.document.news.Article;
-import core.toponym.Toponym;
+import core.language.document.news.Article;
+import core.language.toponym.Toponym;
 import io.CorpusReader;
 import io.xml.XMLStreamReader;
 import io.xml.XMLStreamReaderFactory;
