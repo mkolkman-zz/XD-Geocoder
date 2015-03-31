@@ -2,8 +2,8 @@ package app;
 
 import core.language.document.DocumentRepository;
 import core.language.document.tweet.TweetRepository;
-import io.csv.CsvCorpusReader;
-import io.csv.CsvLineParser;
+import io.corpus.csv.CsvCorpusReader;
+import io.corpus.csv.CsvTweetParser;
 
 import java.io.*;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class Main {
         if(args.length != 3 || !Arrays.asList(argOptions).contains(corpusType))
             printUsageInstructions();
         else {
-            CsvLineParser lineParser = CsvCorpusReader.CsvLineParserFactory.getCsvLineParser(corpusType);
+            CsvTweetParser lineParser = CsvCorpusReader.CsvLineParserFactory.getCsvLineParser(corpusType);
             String inputFile = args[1];
             String outputFile = args[2];
             try {
@@ -30,7 +30,6 @@ public class Main {
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
-
         }
     }
 

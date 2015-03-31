@@ -1,7 +1,7 @@
 package core.language.document.news;
 
 import core.language.document.DocumentRepository;
-import io.CorpusReader;
+import io.corpus.CorpusReader;
 
 import java.text.ParseException;
 import java.util.ArrayList;
