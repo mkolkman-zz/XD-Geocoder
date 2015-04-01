@@ -4,6 +4,7 @@ sourceCompatibility = 1.7
 version = '1.0'
 
 dependencies {
+    compile files ('/libs/stanford-postagger.jar')
     compile 'org.codehaus.woodstox:woodstox-core-asl:4.2.0'
 
     testCompile 'junit:junit:4.11'

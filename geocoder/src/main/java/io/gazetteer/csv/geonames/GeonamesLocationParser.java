@@ -22,24 +22,26 @@ public class GeonamesLocationParser implements CsvLocationParser {
             throw new ParseException("Tabs per line. Expected: " + TABS_PER_LINE + ". Actual: " + tabCount, 0);
 
         Location location = new Location();
-        location.setGeonameId(parts[0]);
+
+        location.setRaw(input);
+        location.setGeonameId(Integer.parseInt(parts[0]));
         location.setName(parts[1]);
-//        location.setAsciiName(parts[2]);
-//        location.setAlternateNames(Arrays.asList(parts[3].split(",")));
-//        location.setCoordinate(new Coordinate(parts[4], parts[5]));
-//        location.setFeatureClass(parts[6]);
-//        location.setFeatureCode(parts[7]);
-//        location.setCountryCode(parts[8]);
-//        location.setCC2(parts[9]);
-//        location.setAdmin1Code(parts[10]);
-//        location.setAdmin2Code(parts[11]);
-//        location.setAdmin3Code(parts[12]);
-//        location.setAdmin4Code(parts[13]);
-//        location.setPopulation(Long.parseLong(parts[14]));
-//        location.setElevation(parts[15]);
-//        location.setDEM(parts[16]);
-//        location.setTimezone(parts[17]);
-//        location.setModificationDate(parts[18]);
+        location.setAsciiName(parts[2]);
+        location.setAlternateNames(Arrays.asList(parts[3].split(",")));
+        location.setCoordinate(new Coordinate(parts[4], parts[5]));
+        location.setFeatureClass(parts[6].equals("") ? '-' : parts[6].charAt(0));
+        location.setFeatureCode(parts[7]);
+        location.setCountryCode(parts[8]);
+        location.setCC2(parts[9]);
+        location.setAdmin1Code(parts[10]);
+        location.setAdmin2Code(parts[11]);
+        location.setAdmin3Code(parts[12]);
+        location.setAdmin4Code(parts[13]);
+        location.setPopulation(Long.parseLong(parts[14]));
+        location.setElevation(parts[15].equals("") ? 0 : Integer.parseInt(parts[15]));
+        location.setDEM(parts[16].equals("") ? 0 : Integer.parseInt(parts[16]));
+        location.setTimezone(parts[17]);
+        location.setModificationDate(parts[18]);
 
         return location;
     }

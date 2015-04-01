@@ -1,11 +1,12 @@
 package core.features.language;
 
 import core.features.Feature;
+import core.language.word.Word;
 
 public class IsInitCap extends Feature {
 
-    public IsInitCap(String word) {
-        boolean isCapitalized = Character.isUpperCase(word.charAt(0));
+    public IsInitCap(Word word) {
+        boolean isCapitalized = Character.isUpperCase(word.getText().charAt(0));
         this.value = (float) (isCapitalized ? 1.0 : 0.0);
     }
 

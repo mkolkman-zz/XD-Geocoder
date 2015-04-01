@@ -1,7 +1,7 @@
 package io.corpus.xml.lgl;
 
 import core.language.document.news.Article;
-import core.language.toponym.Toponym;
+import core.language.word.Toponym;
 import io.corpus.CorpusReader;
 import io.corpus.xml.XMLStreamReader;
 import io.corpus.xml.XMLStreamReaderFactory;

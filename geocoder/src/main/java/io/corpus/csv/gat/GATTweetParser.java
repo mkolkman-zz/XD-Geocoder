@@ -4,7 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.language.toponym.Toponym;
+import core.language.word.Toponym;
 import core.language.document.tweet.Tweet;
 import core.geo.Coordinate;
 import io.corpus.csv.CsvTweetParser;

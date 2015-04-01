@@ -1,5 +1,5 @@
 package core.language.pos;
 
-public enum POSTag {
+public enum PosTag {
     NOUN, PRONOUN, ADJECTIVE, ADVERB, CONJUNCTION, INTERJECTION, PREPOSITION, VERB, ARTICLE
 }

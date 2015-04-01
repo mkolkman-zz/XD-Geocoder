@@ -1,6 +1,6 @@
 package io.corpus.csv.gat;
 
-import core.language.toponym.Toponym;
+import core.language.word.Toponym;
 import core.language.document.tweet.Tweet;
 import java.text.ParseException;
 import java.util.List;

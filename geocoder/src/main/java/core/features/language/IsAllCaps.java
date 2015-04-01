@@ -1,11 +1,12 @@
 package core.features.language;
 
 import core.features.Feature;
+import core.language.word.Word;
 
 public class IsAllCaps extends Feature {
 
-    public IsAllCaps(String word) {
-        this.value = (float) (word.equals(word.toUpperCase()) ? 1.0 : 0.0);
+    public IsAllCaps(Word word) {
+        this.value = (float) (word.getText().equals(word.getText().toUpperCase()) ? 1.0 : 0.0);
     }
 
 }

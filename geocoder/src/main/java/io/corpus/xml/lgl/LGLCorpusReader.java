@@ -3,7 +3,7 @@ package io.corpus.xml.lgl;
 import core.language.document.Document;
 import core.language.document.news.Article;
 import core.geo.Coordinate;
-import core.language.toponym.Toponym;
+import core.language.word.Toponym;
 import io.corpus.CorpusReader;
 import io.corpus.xml.XMLStreamReader;
 

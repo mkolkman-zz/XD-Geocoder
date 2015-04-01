@@ -1,7 +1,7 @@
 package core.features.language;
 
 import core.features.Feature;
-import core.language.pos.POSTag;
+import core.language.pos.PosTag;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -9,15 +9,15 @@ public class HasPartOfSpeechTagTest extends TestCase{
 
     @Test
     public void testEqualPosTag() {
-        Feature feature = new HasPartOfSpeechTag("enschede", POSTag.ADJECTIVE, POSTag.ADJECTIVE);
+        Feature feature = new HasPartOfSpeechTag("enschede", PosTag.ADJECTIVE, PosTag.ADJECTIVE);
 
-        assertEquals((float) 1.0, feature.getValue());
+        assertEquals((float) 1.0, feature.getFloatValue());
     }
 
     @Test
     public void testNonEqualPosTag() {
-        Feature feature = new HasPartOfSpeechTag("enschede", POSTag.ADJECTIVE, POSTag.ARTICLE);
+        Feature feature = new HasPartOfSpeechTag("enschede", PosTag.ADJECTIVE, PosTag.ARTICLE);
 
-        assertEquals((float) 0.0, feature.getValue());
+        assertEquals((float) 0.0, feature.getFloatValue());
     }
 }

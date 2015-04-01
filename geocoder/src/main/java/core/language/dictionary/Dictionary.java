@@ -8,6 +8,8 @@ public interface Dictionary {
 
     int getMentionCount(String word);
 
+    int getWordCount();
+
     boolean isIthWord(int i, String word);
 
     String getIthWord(int i);

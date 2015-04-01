@@ -4,7 +4,11 @@ abstract public class Feature {
 
     protected float value;
 
-    public float getValue() {
+    public float getFloatValue() {
         return value;
+    }
+
+    public boolean getBooleanValue() {
+        return value > 0.5;
     }
 }
