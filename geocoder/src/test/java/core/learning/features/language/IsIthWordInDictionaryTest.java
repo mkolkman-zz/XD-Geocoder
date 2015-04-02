@@ -1,8 +1,9 @@
-package core.features.language;
+package core.learning.features.language;
 
-import core.features.Feature;
+import core.learning.features.Feature;
 import core.language.dictionary.Dictionary;
 import core.language.dictionary.HashMapDictionary;
+import core.language.word.Word;
 import junit.framework.TestCase;
 
 public class IsIthWordInDictionaryTest extends TestCase {
@@ -12,7 +13,7 @@ public class IsIthWordInDictionaryTest extends TestCase {
         dictionary.registerMention("testwoord");
         dictionary.registerMention("yada");
         dictionary.registerMention("hallooooo");
-        Feature feature = new IsIthWordInDictionary(1, "testwoord", dictionary);
+        Feature feature = new IsIthWordInDictionary(1, new Word(0, 9, "testwoord"), dictionary);
         assertTrue(feature.getBooleanValue());
     }
 
@@ -21,7 +22,7 @@ public class IsIthWordInDictionaryTest extends TestCase {
         dictionary.registerMention("yada");
         dictionary.registerMention("testwoord");
         dictionary.registerMention("bladibla");
-        Feature feature = new IsIthWordInDictionary(2, "testwoord", dictionary);
+        Feature feature = new IsIthWordInDictionary(2, new Word(0, 9, "testwoord"), dictionary);
         assertTrue(feature.getBooleanValue());
     }
 
@@ -31,7 +32,7 @@ public class IsIthWordInDictionaryTest extends TestCase {
         dictionary.registerMention("windhoos");
         dictionary.registerMention("testwoord");
 
-        Feature feature = new IsIthWordInDictionary(3, "testwoord", dictionary);
+        Feature feature = new IsIthWordInDictionary(3, new Word(0, 9, "testwoord"), dictionary);
         assertTrue(feature.getBooleanValue());
     }
 
@@ -41,11 +42,11 @@ public class IsIthWordInDictionaryTest extends TestCase {
         dictionary.registerMention("windhoos");
         dictionary.registerMention("hoi");
 
-        Feature feature = new IsIthWordInDictionary(1, "testwoord", dictionary);
+        Feature feature = new IsIthWordInDictionary(1, new Word(0, 9, "testwoord"), dictionary);
         assertFalse(feature.getBooleanValue());
-        feature = new IsIthWordInDictionary(2, "testwoord", dictionary);
+        feature = new IsIthWordInDictionary(2, new Word(0, 9, "testwoord"), dictionary);
         assertFalse(feature.getBooleanValue());
-        feature = new IsIthWordInDictionary(3, "testwoord", dictionary);
+        feature = new IsIthWordInDictionary(3, new Word(0, 9, "testwoord"), dictionary);
         assertFalse(feature.getBooleanValue());
     }
 
@@ -56,7 +57,7 @@ public class IsIthWordInDictionaryTest extends TestCase {
         dictionary.registerMention("testwoord");
         dictionary.registerMention("hiephoi");
 
-        Feature feature = new IsIthWordInDictionary(2, "testwoord", dictionary);
+        Feature feature = new IsIthWordInDictionary(2, new Word(0, 9, "testwoord"), dictionary);
         assertFalse(feature.getBooleanValue());
     }
 }

@@ -1,4 +1,4 @@
-package core.features;
+package core.learning.features;
 
 abstract public class Feature {
 
@@ -10,5 +10,9 @@ abstract public class Feature {
 
     public boolean getBooleanValue() {
         return value > 0.5;
+    }
+
+    public String toString() {
+        return value + "";
     }
 }

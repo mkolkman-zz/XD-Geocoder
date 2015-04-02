@@ -1,6 +1,6 @@
-package core.features.language;
+package core.learning.features.language;
 
-import core.features.Feature;
+import core.learning.features.Feature;
 import core.language.pos.PosTag;
 import core.language.word.Word;
 
