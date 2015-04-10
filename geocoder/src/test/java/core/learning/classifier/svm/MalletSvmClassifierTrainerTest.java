@@ -7,6 +7,7 @@ import core.language.dictionary.HashMapDictionary;
 import core.language.document.news.Article;
 import core.language.labeller.AnnotatedWordLabeller;
 import core.language.labeller.LglLabeller;
+import core.language.pos.stanford.StanfordPosTagger;
 import core.language.tokenizer.WordTokenizer;
 import core.language.tokenizer.stanford.StanfordWordTokenizer;
 import core.language.word.Word;
@@ -18,6 +19,7 @@ import core.learning.features.DummyLocationGazetteer;
 import core.learning.features.FeatureExtractor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.WordTokenFactory;
+import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import io.corpus.CorpusReader;
 import io.corpus.xml.XMLStreamReader;
 import io.corpus.xml.XMLStreamReaderFactory;
@@ -27,6 +29,7 @@ import mallet.transformers.MalletFeatureVectorTransformer;
 import mallet.transformers.MalletInstanceListTransformer;
 import mallet.transformers.MalletInstanceTransformer;
 import org.junit.Test;
+import stanford.transformers.StanfordTransformer;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -114,8 +117,11 @@ public class MalletSvmClassifierTrainerTest {
         List<LearningInstance> learningInstances = new ArrayList<LearningInstance>();
         while(corpusReader.hasNextDocument()) {
             Article article = (Article) corpusReader.getNextDocument();
-            WordTokenizer tokenizer = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
-            Iterator<Word> words = new LglLabeller(tokenizer, article.getToponyms());
+            Iterator<Word> words = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
+            words = new LglLabeller(words, article.getToponyms());
+            MaxentTagger tagger = new MaxentTagger(getClass().getResource(ENGLISH_TAGGER_MODEL).toString());
+            words = new StanfordPosTagger(words, tagger, new StanfordTransformer());
+
 
             FeatureExtractor featureExtractor = new FeatureExtractor(words, dictionary, gazetteer);
             learningInstances.addAll(featureExtractor.getLearningInstances());
