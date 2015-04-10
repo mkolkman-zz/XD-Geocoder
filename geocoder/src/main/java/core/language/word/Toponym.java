@@ -15,6 +15,10 @@ public class Toponym extends Word {
 
 	public Toponym() {}
 
+	public Toponym(String text) {
+		super(text);
+	}
+
 	public Toponym(int start, int end, String text) {
 		super(start, end, text);
 	}

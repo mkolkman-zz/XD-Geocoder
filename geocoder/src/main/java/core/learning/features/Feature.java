@@ -4,6 +4,8 @@ abstract public class Feature {
 
     protected float value;
 
+    public abstract String getName();
+
     public float getFloatValue() {
         return value;
     }
@@ -13,6 +15,6 @@ abstract public class Feature {
     }
 
     public String toString() {
-        return value + "";
+        return getName() + ":" + value + "";
     }
 }

@@ -1,26 +1,42 @@
 package core.learning.features;
 
+import cc.mallet.types.Alphabet;
+import core.language.labeller.Labeller;
+import core.language.pos.PosTagger;
 import core.learning.LearningInstance;
 import core.learning.features.gazetteer.IsInGazetteer;
 import core.learning.features.language.*;
 import core.geo.LocationGazetteer;
 import core.language.dictionary.Dictionary;
-import core.language.tokenizer.WordTokenizer;
 import core.language.word.Word;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Extracts a feature vector from each word retrieved from the WordTokenizer wordIterator.
+ */
 public class FeatureExtractor {
 
-    private WordTokenizer tokenizer;
+    private Iterator<Word> wordIterator;
     private Dictionary dictionary;
     private LocationGazetteer gazetteer;
+    private PosTagger tagger;
 
-    private List<LearningInstance> learningInstances;
+    private Labeller labeller;
 
-    public FeatureExtractor(WordTokenizer tokenizer, Dictionary dictionary, LocationGazetteer gazetteer) {
-        this.tokenizer = tokenizer;
+    protected List<LearningInstance> learningInstances;
+
+    private static Alphabet featureAlphabet;
+    private FeatureVector featureVector;
+
+    public FeatureExtractor(Iterator<Word> wordIterator) {
+        this(wordIterator, null, null);
+    }
+
+    public FeatureExtractor(Iterator<Word> wordIterator, Dictionary dictionary, LocationGazetteer gazetteer) {
+        this.wordIterator = wordIterator;
         this.dictionary = dictionary;
         this.gazetteer = gazetteer;
     }
@@ -32,38 +48,41 @@ public class FeatureExtractor {
         return learningInstances;
     }
 
-    private List<LearningInstance> extractLearningInstances() {
+    protected List<LearningInstance> extractLearningInstances() {
         learningInstances = new ArrayList<LearningInstance>();
 
-        while(tokenizer.hasNext()) {
-            Word word = tokenizer.next();
-            List<Feature> features = extractFeatures(word);
+        while(wordIterator.hasNext()) {
+            Word word = wordIterator.next();
+            FeatureVector features = extractFeatures(word);
 
-            learningInstances.add(new LearningInstance(word, features));
+            learningInstances.add(new LearningInstance(word, features, word.getLabel()));
         }
 
         return learningInstances;
     }
 
-    private List<Feature> extractFeatures(Word word) {
-        List<Feature> features = new ArrayList<Feature>();
+    protected FeatureVector extractFeatures(Word word) {
+        featureVector = new FeatureVector();
 
         //Form features
-        features.add(new IsInitCap(word));
-        features.add(new IsAllCaps(word));
-        features.add(new HasPrefix(word, "ast"));
-        features.add(new HasSuffix(word, "mouth"));
-        features.add(new HasSuffix(word, "minster"));
-        features.add(new HasSuffix(word, "ness"));
+        featureVector.add(new IsInitCap(word));
+        featureVector.add(new IsAllCaps(word));
+        featureVector.add(new HasPrefix(word, "ast"));
+        featureVector.add(new HasSuffix(word, "mouth"));
+        featureVector.add(new HasSuffix(word, "minster"));
+        featureVector.add(new HasSuffix(word, "ness"));
+        featureVector.add(new HasSuffix(word, "Hallo"));
+
+        //POS features
+        featureVector.add(new PartOfSpeechTag(word));
 
         //Dictionary features
-        for (int i = 1; i < dictionary.getWordCount(); i++) {
-            features.add(new IsIthWordInDictionary(i, word, dictionary));
-        }
+        featureVector.add(new WordFrequency(word, dictionary));
 
         //Gazetteer features
-        features.add(new IsInGazetteer(word, gazetteer));
+        featureVector.add(new IsInGazetteer(word, gazetteer));
 
-        return features;
+        return featureVector;
     }
+
 }

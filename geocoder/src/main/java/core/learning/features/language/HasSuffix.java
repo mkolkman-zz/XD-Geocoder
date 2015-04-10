@@ -5,7 +5,17 @@ import core.language.word.Word;
 
 public class HasSuffix extends Feature {
 
+    private final Word word;
+    private final String suffix;
+
     public HasSuffix(Word word, String suffix) {
+        this.word = word;
+        this.suffix = suffix;
         this.value = (float) (word.getText().endsWith(suffix) ? 1.0 : 0.0);
+    }
+
+    @Override
+    public String getName() {
+        return "HasSuffix_" + suffix;
     }
 }

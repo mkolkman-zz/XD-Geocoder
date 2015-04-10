@@ -9,4 +9,8 @@ public class IsAllCaps extends Feature {
         this.value = (float) (word.getText().equals(word.getText().toUpperCase()) ? 1.0 : 0.0);
     }
 
+    @Override
+    public String getName() {
+        return "IsAllCaps";
+    }
 }

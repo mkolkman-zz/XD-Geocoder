@@ -1,6 +1,12 @@
 package core.language.dictionary;
 
+import io.corpus.CorpusReader;
+
+import java.text.ParseException;
+
 public interface Dictionary {
+
+    void load(CorpusReader corpusReader) throws ParseException;
 
     boolean contains(String word);
 

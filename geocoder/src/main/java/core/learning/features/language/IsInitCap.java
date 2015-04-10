@@ -10,4 +10,8 @@ public class IsInitCap extends Feature {
         this.value = (float) (isCapitalized ? 1.0 : 0.0);
     }
 
+    @Override
+    public String getName() {
+        return "IsInitCap";
+    }
 }

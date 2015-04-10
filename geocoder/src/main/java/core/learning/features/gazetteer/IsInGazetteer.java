@@ -12,4 +12,9 @@ public class IsInGazetteer extends Feature {
     public IsInGazetteer(Word word, LocationGazetteer gazetteer) {
         this.value = (float) (gazetteer.contains(word.getText()) ? 1.0 : 0.0);
     }
+
+    @Override
+    public String getName() {
+        return "IsInGazetteer";
+    }
 }

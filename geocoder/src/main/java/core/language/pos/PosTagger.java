@@ -1,7 +1,11 @@
 package core.language.pos;
 
-public interface PosTagger {
-    String tagString(String sentence);
+import core.language.word.Word;
 
-    String tagTokenizedString(String sentence);
+import java.util.Iterator;
+import java.util.List;
+
+public interface PosTagger extends Iterator<Word> {
+
+    List<Word> tagWordList(List<Word> sentence);
 }

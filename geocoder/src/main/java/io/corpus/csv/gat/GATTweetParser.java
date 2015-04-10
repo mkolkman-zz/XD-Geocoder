@@ -51,8 +51,7 @@ public class GATTweetParser implements CsvTweetParser {
 	 */
 	private Toponym parseToponym(String input) {
 		String[] parts = input.split("\\[");		
-		Toponym result = new Toponym();
-		result.setText(parts[0]);
+		Toponym result = new Toponym(parts[0]);
 		String[] geoAnnotation = parts[1].split("\\]");
 		result.setCoordinates(parseGeoAnnotationCoordinates(geoAnnotation[0]));
 		if(geoAnnotation.length > 1)
