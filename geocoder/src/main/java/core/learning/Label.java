@@ -1,5 +1,7 @@
 package core.learning;
 
-public enum Label {
+import java.io.Serializable;
+
+public enum Label implements Serializable {
     NO_TOPONYM, START_OF_TOPONYM, IN_TOPONYM, UNKNOWN
 }

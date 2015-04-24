@@ -49,6 +49,7 @@ public class FeatureExtractor {
     }
 
     protected List<LearningInstance> extractLearningInstances() {
+
         learningInstances = new ArrayList<LearningInstance>();
 
         while(wordIterator.hasNext()) {
@@ -67,16 +68,17 @@ public class FeatureExtractor {
         //Form features
         featureVector.add(new IsInitCap(word));
         featureVector.add(new IsAllCaps(word));
-        featureVector.add(new HasPrefix(word, "ast"));
-        featureVector.add(new HasSuffix(word, "mouth"));
-        featureVector.add(new HasSuffix(word, "minster"));
-        featureVector.add(new HasSuffix(word, "ness"));
-        featureVector.add(new HasSuffix(word, "Hallo"));
+//        featureVector.add(new HasPrefix(word, "ast"));
+//        featureVector.add(new HasSuffix(word, "mouth"));
+//        featureVector.add(new HasSuffix(word, "minster"));
+//        featureVector.add(new HasSuffix(word, "ness"));
+//        featureVector.add(new HasSuffix(word, "Hallo"));
 
         //POS features
         featureVector.add(new PartOfSpeechTag(word));
 
         //Dictionary features
+        featureVector.add(new WordIndex(word, dictionary));
         featureVector.add(new WordFrequency(word, dictionary));
 
         //Gazetteer features

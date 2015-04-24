@@ -8,12 +8,12 @@ import java.util.List;
 public class DummyLocationGazetteer implements LocationGazetteer {
 
     @Override
-    public void loadLocations() {
-        return;
+    public boolean contains(String toponym) {
+        return false;
     }
 
     @Override
-    public boolean contains(String toponym) {
+    public boolean containsPartial(String text) {
         return false;
     }
 

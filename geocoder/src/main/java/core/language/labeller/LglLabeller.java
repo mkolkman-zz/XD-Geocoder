@@ -26,16 +26,29 @@ public class LglLabeller implements Labeller {
     public Word next() {
         Word word = words.next();
         for(Toponym toponym : toponyms) {
-            if(toponym.getStart() == word.getStart() && toponym.getText().startsWith(word.getText())) {
+            if(isBeginOfToponym(word, toponym)) {
                 word.setLabel(Label.START_OF_TOPONYM);
                 return word;
-            }else if (toponym.getStart() < word.getStart() && toponym.getEnd() >= word.getEnd() && toponym.getText().contains(word.getText())) {
+            }else if (isInToponym(word, toponym)) {
                 word.setLabel(Label.IN_TOPONYM);
                 return word;
             }
         }
         word.setLabel(Label.NO_TOPONYM);
         return word;
+    }
+
+    private boolean isBeginOfToponym(Word word, Toponym toponym) {
+        return toponym.getStart() == word.getStart() && toponym.getText().startsWith(word.getText());
+    }
+
+    private boolean isInToponym(Word word, Toponym toponym) {
+        return toponym.getStart() < word.getStart() && toponym.getEnd() >= word.getEnd() && toponym.getText().contains(word.getText());
+    }
+
+    @Override
+    public void remove() {
+
     }
 
 }

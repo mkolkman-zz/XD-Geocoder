@@ -4,12 +4,11 @@ import java.util.List;
 
 public interface LocationGazetteer {
 
-    void loadLocations();
-
     boolean contains(String toponym);
 
-    List<Location> getLocations(String toponym);
+    boolean containsPartial(String text);
+
+    List<Location> getLocations(String toponym) throws Exception;
 
     void add(Location location);
-
 }

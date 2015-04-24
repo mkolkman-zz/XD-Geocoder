@@ -17,12 +17,13 @@ import java.util.List;
 
 public class StanfordPosTaggerTest {
 
-    public static final String ENGLISH_TAGGER_MODEL = "/core/language/pos/english-left3words-distsim.tagger";
+    private static final String ENGLISH_TAGGER_MODEL = "/core/language/pos/english-left3words-distsim.tagger";
 
     @Test
     public void testTagWordListOnSimpleSentence() {
         WordTokenizer tokenizer = new StanfordWordTokenizer(new PTBTokenizer(new StringReader("This is a very simple example sentence."), new WordTokenFactory(), ""));
-        MaxentTagger maxentTagger = new MaxentTagger(getClass().getResource(ENGLISH_TAGGER_MODEL).toString());
+        String modelFile = getClass().getResource(ENGLISH_TAGGER_MODEL).toString();
+        MaxentTagger maxentTagger = new MaxentTagger(modelFile);
         PosTagger tagger = new StanfordPosTagger(tokenizer, maxentTagger, new StanfordTransformer());
 
         while(tagger.hasNext()) {

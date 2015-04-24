@@ -6,11 +6,8 @@ import core.language.word.Word;
 
 public class IsInGazetteer extends Feature {
 
-    private Word word;
-    private LocationGazetteer gazetteer;
-
     public IsInGazetteer(Word word, LocationGazetteer gazetteer) {
-        this.value = (float) (gazetteer.contains(word.getText()) ? 1.0 : 0.0);
+        this.value = (float) (gazetteer.containsPartial(word.getText()) ? 1.0 : 0.0);
     }
 
     @Override

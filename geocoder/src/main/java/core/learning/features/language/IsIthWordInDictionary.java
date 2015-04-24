@@ -7,13 +7,9 @@ import core.language.word.Word;
 public class IsIthWordInDictionary extends Feature {
 
     private final int i;
-    private final Word word;
-    private final Dictionary dictionary;
 
     public IsIthWordInDictionary(int i, Word word, Dictionary dictionary) {
         this.i = i;
-        this.word = word;
-        this.dictionary = dictionary;
         this.value = (float) (dictionary.isIthWord(i, word.getText()) ? 1.0 : 0.0);
     }
 

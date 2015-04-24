@@ -1,9 +1,10 @@
 package core.learning.features;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeatureVector {
+public class FeatureVector implements Serializable {
 
     private List<Feature> features;
 

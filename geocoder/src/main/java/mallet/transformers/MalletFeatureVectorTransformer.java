@@ -7,8 +7,9 @@ public class MalletFeatureVectorTransformer {
 
     public FeatureVector toMalletFeatureVector(core.learning.features.FeatureVector input) {
         Alphabet dataAlphabet = MalletFeatureAlphabet.getInstance();
-        dataAlphabet.lookupIndices(input.getFeatureNames(), true);
-        return new FeatureVector(dataAlphabet, input.getFeatureValues());
+        int[] featureIndices = dataAlphabet.lookupIndices(input.getFeatureNames(), true);
+        double[] featureValues = input.getFeatureValues();
+        return new FeatureVector(dataAlphabet, featureIndices, featureValues);
     }
 
 }

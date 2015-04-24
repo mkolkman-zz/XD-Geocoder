@@ -1,0 +1,54 @@
+<articles>
+    <article docid="40450848">
+        <feedid>138</feedid>
+        <title>Alexandria woman charged in connection with Kelleyland fire</title>
+        <domain>thetowntalk.com</domain>
+        <url>http://www.thetowntalk.com/article/20090320/NEWS01/90320003/-1/rss</url>
+        <dltime>2009-03-20 12:24:52.002364-05</dltime>
+        <text><![CDATA[Alexandria woman charged in connection with Kelleyland fire. Chiquita Raquel Henry, 19, of 1935 Orchard St., Alexandria, was arrested and charged with aggravated arson and unauthorized entry of an inhabited dwelling. Both the Sheriff's Office and Rapides Parish Fire District 2 investigated the March 7 fire at 6016 Dublin Road that led to Henry's arrest. According to the Sheriff's Office, the man who lives in the mobile home at that address was inside the home when Henry came in and set the bed and couch on fire with a lighter. The man only knew the woman by a nickname but investigation led detectives to Henry.]]></text>
+        <toponyms count="3">
+            <toponym>
+                <start>0</start>
+                <end>10</end>
+                <phrase>Alexandria</phrase>
+                <gaztag geonameid="4314550">
+                    <name>Alexandria</name>
+                    <fclass>P</fclass>
+                    <fcode>PPL</fcode>
+                    <lat>31.3113</lat>
+                    <lon>-92.4451</lon>
+                    <country geonameid="6252001">United States</country>
+                    <admin1 geonameid="4331987">Louisiana</admin1>
+                </gaztag>
+            </toponym>
+            <toponym>
+                <start>109</start>
+                <end>119</end>
+                <phrase>Alexandria</phrase>
+                <gaztag geonameid="4314550">
+                    <name>Alexandria</name>
+                    <fclass>P</fclass>
+                    <fcode>PPL</fcode>
+                    <lat>31.3113</lat>
+                    <lon>-92.4451</lon>
+                    <country geonameid="6252001">United States</country>
+                    <admin1 geonameid="4331987">Louisiana</admin1>
+                </gaztag>
+            </toponym>
+            <toponym>
+                <start>247</start>
+                <end>261</end>
+                <phrase>Rapides Parish</phrase>
+                <gaztag geonameid="4338356">
+                    <name>Rapides Parish</name>
+                    <fclass>A</fclass>
+                    <fcode>ADM2</fcode>
+                    <lat>31.1669</lat>
+                    <lon>-92.4835</lon>
+                    <country geonameid="6252001">United States</country>
+                    <admin1 geonameid="4331987">Louisiana</admin1>
+                </gaztag>
+            </toponym>
+        </toponyms>
+    </article>
+</articles>

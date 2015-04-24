@@ -4,7 +4,9 @@ import core.language.word.Word;
 import core.learning.features.Feature;
 import core.learning.features.FeatureVector;
 
-public class LearningInstance {
+import java.io.Serializable;
+
+public class LearningInstance implements Serializable {
 
     private Word word;
     private FeatureVector features;

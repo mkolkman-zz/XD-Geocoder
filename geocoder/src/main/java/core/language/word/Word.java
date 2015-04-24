@@ -3,9 +3,11 @@ package core.language.word;
 import core.language.pos.PosTag;
 import core.learning.Label;
 
-public class Word {
+import java.io.Serializable;
 
-    private PosTag posTag;
+public class Word implements Serializable {
+
+    private PosTag posTag = PosTag.UNKNOWN;
     private int start;
     private int end;
     private String text;
@@ -68,11 +70,15 @@ public class Word {
         this.label = label;
     }
 
-    public String toString() {
-        return text;
-    }
-
     public PosTag getPosTag() {
         return posTag;
+    }
+
+    public void setPosTag(PosTag posTag) {
+        this.posTag = posTag;
+    }
+
+    public String toString() {
+        return text;
     }
 }

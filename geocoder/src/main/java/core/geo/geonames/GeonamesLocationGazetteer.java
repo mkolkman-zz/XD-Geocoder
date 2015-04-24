@@ -14,23 +14,35 @@ import java.util.Map;
 
 public class GeonamesLocationGazetteer implements LocationGazetteer {
 
+    private static final int LOCATION_TOTAL = 10000000;
+
     private final CsvGazetteerReader gazetteerReader;
     private CsvLocationParser locationParser;
-    private Map<String, List<String>> candidates = new HashMap<String, List<String>>();
+
+    private List<String> locations;
+
+    private Map<String, List<Integer>> toponymToCandidatesIndex;
+    private Map<String, List<Integer>> partialToponymToCandidatesIndex;
 
     public GeonamesLocationGazetteer(CsvGazetteerReader gazetteerReader, CsvLocationParser locationParser) {
         this.gazetteerReader = gazetteerReader;
         this.locationParser = locationParser;
+        loadLocations();
     }
 
-    @Override
-    public void loadLocations() {
+    private void loadLocations() {
         System.out.println("Loading geonames gazetteer...");
+
+        locations = new ArrayList<String>();
+        toponymToCandidatesIndex = new HashMap<String, List<Integer>>();
+        partialToponymToCandidatesIndex = new HashMap<String, List<Integer>>();
+
         try {
             int count = 0;
             while(gazetteerReader.hasNextLocation()) {
-                if(count % 100000 == 0) {
-                    System.out.println("Loaded " + count + " candidates from Geonames. Used " + Runtime.getRuntime().totalMemory() / (1024 * 1024) + " MB of memory.");
+                if(count % 1000000 == 0) {
+                    double percentage = ( ( (double) count / LOCATION_TOTAL ) * 100);
+                    System.out.println( percentage + "%");
                 }
                 add(gazetteerReader.getNextLocation());
                 count++;
@@ -42,31 +54,37 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
     }
 
     @Override
-    public boolean contains(String toponym) {
-        return candidates.containsKey(toponym);
+    public boolean contains(String word) {
+        return toponymToCandidatesIndex.containsKey(word);
+    }
+
+    public boolean containsPartial(String partial) {
+        return partialToponymToCandidatesIndex.containsKey(partial);
     }
 
     @Override
-    public List<Location> getLocations(String toponym) {
-        List<String> raws = candidates.get(toponym);
-        List<Location> result = new ArrayList<Location>();
-        for (String raw : raws) {
-            try {
-                result.add(locationParser.parse(raw));
-            } catch (ParseException e) {
-                System.err.println(e.getMessage());
-            }
-        }
-        return result;
+    public List<Location> getLocations(String toponym) throws Exception {
+        throw new Exception("Not yet implemented");
     }
 
     @Override
     public void add(Location location) {
+        locations.add(location.getRaw());
+        Integer locationIndex = locations.size() - 1;
+
         String toponym = location.getName();
-        if( ! candidates.containsKey(toponym)) {
-            candidates.put(toponym, new ArrayList<String>());
+        if( ! toponymToCandidatesIndex.containsKey(toponym)) {
+            toponymToCandidatesIndex.put(toponym, new ArrayList<Integer>());
         }
-        candidates.get(toponym).add(location.getRaw());
+        toponymToCandidatesIndex.get(toponym).add(locationIndex);
+
+        String[] toponymParts = toponym.split(" ");
+        for (String toponymPart : toponymParts) {
+            if( ! partialToponymToCandidatesIndex.containsKey(toponymPart)) {
+                partialToponymToCandidatesIndex.put(toponymPart, new ArrayList<Integer>());
+            }
+            partialToponymToCandidatesIndex.get(toponymPart).add(locationIndex);
+        }
     }
 
 }

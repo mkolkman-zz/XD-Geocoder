@@ -80,7 +80,7 @@ public class HashMapDictionary implements Dictionary {
 
     @Override
     public int getRank(String word) {
-        return 0;
+        return words.indexOf(word);
     }
 
     private class IncrementableInteger {

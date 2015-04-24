@@ -18,10 +18,9 @@ public class GeonamesLocationGazetteerTest {
     private LocationGazetteer locations;
 
     @Test
-    public void testLoading() throws FileNotFoundException {
+    public void testLoading() throws Exception {
         CsvLocationParser lineParser = CsvGazetteerReader.CsvLocationParserFactory.getCsvLocationParser("Geonames");
         locations = new GeonamesLocationGazetteer(new CsvGazetteerReader(new BufferedReader(new FileReader(INPUT_FILE)), lineParser), lineParser);
-        locations.loadLocations();
 
         List<Location> result = locations.getLocations("Enschede");
 

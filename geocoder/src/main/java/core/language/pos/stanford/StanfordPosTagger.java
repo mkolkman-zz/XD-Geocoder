@@ -37,7 +37,11 @@ public class StanfordPosTagger implements PosTagger {
     public List<Word> tagWordList(List<Word> sentence) {
         List<StanfordWord> stanfordSentence = transformer.toStanfordSentence(sentence);
         List<TaggedWord> taggedStanfordSentence = tagger.apply(stanfordSentence);
-        return transformer.fromTaggedSentence(taggedStanfordSentence);
+        List<Word> taggedSentence = transformer.fromTaggedSentence(taggedStanfordSentence);
+        for (int i = 0; i < sentence.size(); i++) {
+            sentence.get(i).setPosTag(taggedSentence.get(i).getPosTag());
+        }
+        return sentence;
     }
 
     @Override
@@ -48,5 +52,10 @@ public class StanfordPosTagger implements PosTagger {
     @Override
     public Word next() {
         return outputSentence.next();
+    }
+
+    @Override
+    public void remove() {
+
     }
 }

@@ -37,4 +37,9 @@ public class AnnotatedWordLabeller implements Labeller {
         return next;
     }
 
+    @Override
+    public void remove() {
+
+    }
+
 }

@@ -22,4 +22,9 @@ public class StanfordWordTokenizer implements WordTokenizer{
         String word = next.word();
         return new Word(next.beginPosition(), next.endPosition(), word, Label.UNKNOWN);
     }
+
+    @Override
+    public void remove() {
+
+    }
 }

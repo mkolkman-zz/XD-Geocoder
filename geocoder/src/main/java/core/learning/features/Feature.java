@@ -1,6 +1,8 @@
 package core.learning.features;
 
-abstract public class Feature {
+import java.io.Serializable;
+
+abstract public class Feature implements Serializable {
 
     protected float value;
 

@@ -28,6 +28,7 @@ public class MalletSvmClassifier implements Classifier {
         return null;
     }
 
+    @Override
     public Trial trial(List<LearningInstance> input) {
         InstanceList instances = instanceListTransformer.toMalletInstanceList(input);
 
