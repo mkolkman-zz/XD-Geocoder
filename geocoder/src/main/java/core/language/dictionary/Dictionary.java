@@ -12,11 +12,15 @@ public interface Dictionary {
 
     boolean contains(String word);
 
-    void registerMention(String word, boolean isToponym);
+    void registerMention(Word word);
 
     int getMentionCount(String word);
 
     int getToponymCount(String word);
+
+    int getBeginOfToponymCount(String word);
+
+    int getInToponymCount(String word);
 
     int getUppercaseCount(String word);
 

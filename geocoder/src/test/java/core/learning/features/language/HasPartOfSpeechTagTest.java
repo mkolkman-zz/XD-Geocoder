@@ -10,14 +10,14 @@ public class HasPartOfSpeechTagTest extends TestCase{
 
     @Test
     public void testEqualPosTag() {
-        Feature feature = new HasPartOfSpeechTag(new Word(0, 8, "testwoord"), PosTag.ADJECTIVE, PosTag.ADJECTIVE);
+        Feature feature = new HasPartOfSpeechTag(new Word(0, 8, "testwoord"), PosTag.ADJECTIVE);
 
         assertEquals((float) 1.0, feature.getFloatValue());
     }
 
     @Test
     public void testNonEqualPosTag() {
-        Feature feature = new HasPartOfSpeechTag(new Word(0, 9, "testwoord"), PosTag.ADJECTIVE, PosTag.ARTICLE);
+        Feature feature = new HasPartOfSpeechTag(new Word(0, 9, "testwoord"), PosTag.ARTICLE);
 
         assertEquals((float) 0.0, feature.getFloatValue());
     }

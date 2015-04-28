@@ -17,29 +17,32 @@ public class HashMapDictionary implements Dictionary {
 
     private List<String> words = new ArrayList<String>();
     private Map<String, IncrementableInteger> wordCounts = new HashMap<String, IncrementableInteger>();
-    private Map<String, IncrementableInteger> toponymCounts = new HashMap<String, IncrementableInteger>();
+    private Map<String, IncrementableInteger> beginOfToponymCounts = new HashMap<String, IncrementableInteger>();
+    private Map<String, IncrementableInteger> inToponymCounts = new HashMap<String, IncrementableInteger>();
     private Map<String, IncrementableInteger> uppercaseCounts = new HashMap<String, IncrementableInteger>();
 
     @Override
     public void load(Iterator<Word> wordIterator) throws ParseException {
         while(wordIterator.hasNext()) {
             Word word = wordIterator.next();
-            boolean isToponym = word.getLabel() == Label.START_OF_TOPONYM || word.getLabel() == Label.IN_TOPONYM;
-            registerMention(word.getText(), isToponym);
+            registerMention(word);
         }
     }
 
     @Override
-    public void registerMention(String word, boolean isToponym) {
-        boolean isUppercase = Character.isUpperCase(word.charAt(0));
+    public void registerMention(Word word) {
+        String token = word.getText();
+        boolean isUppercase = Character.isUpperCase(token.charAt(0));
+        token = preprocess(token);
 
-        word = preprocess(word);
-        registerMention(word);
-        if(isToponym) {
-            registerToponym(word);
+        registerMention(token);
+        if(word.getLabel() == Label.START_OF_TOPONYM) {
+            registerBeginOfToponym(token);
+        }else if(word.getLabel() == Label.IN_TOPONYM) {
+            registerInToponym(token);
         }
         if(isUppercase) {
-            registerUppercase(word);
+            registerUppercase(token);
         }
     }
 
@@ -52,11 +55,18 @@ public class HashMapDictionary implements Dictionary {
         wordCounts.get(word).increment();
     }
 
-    public void registerToponym(String toponym) {
-        if( ! toponymCounts.containsKey(toponym)) {
-            toponymCounts.put(toponym, new IncrementableInteger());
+    private void registerBeginOfToponym(String token) {
+        if( ! beginOfToponymCounts.containsKey(token)) {
+            beginOfToponymCounts.put(token, new IncrementableInteger());
         }
-        toponymCounts.get(toponym).increment();
+        beginOfToponymCounts.get(token).increment();
+    }
+
+    private void registerInToponym(String token) {
+        if( ! inToponymCounts.containsKey(token)) {
+            inToponymCounts.put(token, new IncrementableInteger());
+        }
+        inToponymCounts.get(token).increment();
     }
 
     private void registerUppercase(String word) {
@@ -83,9 +93,21 @@ public class HashMapDictionary implements Dictionary {
         return wordCounts.containsKey(word) ? wordCounts.get(word).getValue() : 0;
     }
 
+    @Override
     public int getToponymCount(String word) {
+        return 0;
+    }
+
+    @Override
+    public int getBeginOfToponymCount(String word) {
         word = preprocess(word);
-        return toponymCounts.containsKey(word) ? toponymCounts.get(word).getValue() : 0;
+        return beginOfToponymCounts.containsKey(word) ? beginOfToponymCounts.get(word).getValue() : 0;
+    }
+
+    @Override
+    public int getInToponymCount(String word) {
+        word = preprocess(word);
+        return inToponymCounts.containsKey(word) ? inToponymCounts.get(word).getValue() : 0;
     }
 
     public int getUppercaseCount(String word) {

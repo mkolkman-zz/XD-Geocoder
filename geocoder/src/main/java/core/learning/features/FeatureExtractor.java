@@ -2,8 +2,10 @@ package core.learning.features;
 
 import cc.mallet.types.Alphabet;
 import core.language.labeller.Labeller;
+import core.language.pos.PosTag;
 import core.language.pos.PosTagger;
 import core.learning.LearningInstance;
+import core.learning.features.dictionary.*;
 import core.learning.features.gazetteer.IsInGazetteer;
 import core.learning.features.gazetteer.IsPartialInGazetteer;
 import core.learning.features.language.*;
@@ -80,13 +82,19 @@ public class FeatureExtractor {
         }
 
         //POS features
+        for(PosTag posTag : PosTag.values()) {
+            featureVector.add(new HasPartOfSpeechTag(word, posTag));
+        }
         featureVector.add(new PartOfSpeechTag(word));
 
         //Dictionary features
         featureVector.add(new WordIndex(word, dictionary));
         featureVector.add(new WordFrequency(word, dictionary));
-        featureVector.add(new ToponymFrequency(word, dictionary));
-        featureVector.add(new ToponymFraction(word, dictionary));
+        featureVector.add(new WordFraction(word, dictionary));
+        featureVector.add(new BeginOfToponymFrequency(word, dictionary));
+        featureVector.add(new BeginOfToponymFraction(word, dictionary));
+        featureVector.add(new InToponymFrequency(word, dictionary));
+        featureVector.add(new InToponymFraction(word, dictionary));
         featureVector.add(new UppercaseFrequency(word, dictionary));
         featureVector.add(new UppercaseFraction(word, dictionary));
 

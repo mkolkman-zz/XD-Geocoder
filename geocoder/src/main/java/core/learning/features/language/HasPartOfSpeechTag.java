@@ -8,9 +8,9 @@ public class HasPartOfSpeechTag extends Feature {
 
     private final PosTag expected;
 
-    public HasPartOfSpeechTag(Word word, PosTag assigned, PosTag expected) {
+    public HasPartOfSpeechTag(Word word, PosTag expected) {
         this.expected = expected;
-        this.value = (float) (assigned == expected ? 1.0 : 0.0);
+        this.value = (float) (word.getPosTag() == expected ? 1.0 : 0.0);
     }
 
     public String getName() {

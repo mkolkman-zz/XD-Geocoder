@@ -1,7 +1,8 @@
-package core.learning.features;
+package core.learning.features.dictionary;
 
 import core.language.dictionary.Dictionary;
 import core.language.word.Word;
+import core.learning.features.Feature;
 
 public class ToponymFrequency extends Feature {
 
