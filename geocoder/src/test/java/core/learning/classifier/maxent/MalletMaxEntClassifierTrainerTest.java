@@ -87,7 +87,7 @@ public class MalletMaxEntClassifierTrainerTest {
         XMLStreamReader xmlStreamReader = XMLStreamReaderFactory.makeXMLStreamReader(new FileInputStream(LGL_ARTICLES_FILE), XMLStreamReaderType.WOODSTOX);
         CorpusReader corpusReader = new LGLCorpusReader(xmlStreamReader);
         Dictionary dictionary = new HashMapDictionary();
-        dictionary.load(corpusReader);
+//        dictionary.load(corpusReader);
 
         LocationGazetteer gazetteer = new DummyLocationGazetteer();
 

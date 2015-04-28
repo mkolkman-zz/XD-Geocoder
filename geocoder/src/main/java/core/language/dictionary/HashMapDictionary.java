@@ -4,37 +4,45 @@ import core.language.document.Document;
 import core.language.tokenizer.WordTokenizer;
 import core.language.tokenizer.stanford.StanfordWordTokenizer;
 import core.language.word.Word;
+import core.learning.Label;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.WordTokenFactory;
 import io.corpus.CorpusReader;
 
 import java.io.StringReader;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class HashMapDictionary implements Dictionary {
 
     private List<String> words = new ArrayList<String>();
     private Map<String, IncrementableInteger> wordCounts = new HashMap<String, IncrementableInteger>();
+    private Map<String, IncrementableInteger> toponymCounts = new HashMap<String, IncrementableInteger>();
+    private Map<String, IncrementableInteger> uppercaseCounts = new HashMap<String, IncrementableInteger>();
 
     @Override
-    public void load(CorpusReader corpusReader) throws ParseException {
-        System.out.print("Loading dictionary... ");
-        while(corpusReader.hasNextDocument()) {
-            Document document = corpusReader.getNextDocument();
-            WordTokenizer tokenizer = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(document.getText()), new WordTokenFactory(), ""));
-            while(tokenizer.hasNext()) {
-                Word word = tokenizer.next();
-                registerMention(word.getText());
-            }
+    public void load(Iterator<Word> wordIterator) throws ParseException {
+        while(wordIterator.hasNext()) {
+            Word word = wordIterator.next();
+            boolean isToponym = word.getLabel() == Label.START_OF_TOPONYM || word.getLabel() == Label.IN_TOPONYM;
+            registerMention(word.getText(), isToponym);
         }
-        System.out.println("Done!");
     }
 
     @Override
+    public void registerMention(String word, boolean isToponym) {
+        boolean isUppercase = Character.isUpperCase(word.charAt(0));
+
+        word = preprocess(word);
+        registerMention(word);
+        if(isToponym) {
+            registerToponym(word);
+        }
+        if(isUppercase) {
+            registerUppercase(word);
+        }
+    }
+
     public void registerMention(String word) {
         word = preprocess(word);
         if( ! wordCounts.containsKey(word)) {
@@ -42,6 +50,20 @@ public class HashMapDictionary implements Dictionary {
             words.add(word);
         }
         wordCounts.get(word).increment();
+    }
+
+    public void registerToponym(String toponym) {
+        if( ! toponymCounts.containsKey(toponym)) {
+            toponymCounts.put(toponym, new IncrementableInteger());
+        }
+        toponymCounts.get(toponym).increment();
+    }
+
+    private void registerUppercase(String word) {
+        if( ! uppercaseCounts.containsKey(word)) {
+            uppercaseCounts.put(word, new IncrementableInteger());
+        }
+        uppercaseCounts.get(word).increment();
     }
 
     private String preprocess(String word) {
@@ -58,7 +80,17 @@ public class HashMapDictionary implements Dictionary {
     @Override
     public int getMentionCount(String word) {
         word = preprocess(word);
-        return wordCounts.get(word).getValue();
+        return wordCounts.containsKey(word) ? wordCounts.get(word).getValue() : 0;
+    }
+
+    public int getToponymCount(String word) {
+        word = preprocess(word);
+        return toponymCounts.containsKey(word) ? toponymCounts.get(word).getValue() : 0;
+    }
+
+    public int getUppercaseCount(String word) {
+        word = preprocess(word);
+        return uppercaseCounts.containsKey(word) ? uppercaseCounts.get(word).getValue() : 0;
     }
 
     @Override

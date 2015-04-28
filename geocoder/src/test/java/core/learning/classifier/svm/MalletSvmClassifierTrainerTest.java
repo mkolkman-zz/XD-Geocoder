@@ -44,12 +44,12 @@ public class MalletSvmClassifierTrainerTest {
     private static final String LGL_MULTIPLE_ARTICLES_TEST_FILE = "/core/lgl-multiple-articles-test.xml";
     private static final String LGL_ARTICLES_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/corpora/LGL/articles.xml";
 
-    private static final String GEONAMES_GAZETTEER_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/gazetteers/geonames/allCountries.txt";
+    private static final String GEONAMES_GAZETTEER_FILE = "E:\\Development\\gazetteers\\geonames\\allCountries.txt";
 
     private static final String ENGLISH_TAGGER_MODEL = "/core/language/pos/english-left3words-distsim.tagger";
 
-    public static final String FEATURE_FILE = "/home/mike/data/xd-features.ser";
-    public static final String EXPERIMENT_RESULTS_FILE = "/home/mike/data/xd-results.csv";
+    public static final String FEATURE_FILE = "E:\\Development\\features\\xd-features.ser";
+    public static final String EXPERIMENT_RESULTS_FILE = "E:\\Development\\results\\xd-results.csv";
 
     public double WEIGHT_B = 65.0;
     public double WEIGHT_I = 165.0;
@@ -105,7 +105,7 @@ public class MalletSvmClassifierTrainerTest {
             learningInstances = readLearningInstances();
         }else {
             String corpusFile = getClass().getResource(LGL_MULTIPLE_ARTICLES_TEST_FILE).toString();
-            corpusFile = "/home/mike/dev/MasterThesis/XD-Geocoder/geocoder/build/resources/test/core/lgl-multiple-articles-test.xml";
+            corpusFile = "E:\\Development\\java\\XD-Geocoder\\geocoder\\src\\test\\resources\\core\\lgl-multiple-articles-test.xml";
             learningInstances = extractLearningInstances(getDictionary(corpusFile), getGazetteer(GEONAMES_GAZETTEER_FILE), getCorpusReader(corpusFile));
             writeLearningInstances(learningInstances);
         }
@@ -136,7 +136,12 @@ public class MalletSvmClassifierTrainerTest {
         XMLStreamReader xmlStreamReader = XMLStreamReaderFactory.makeXMLStreamReader(new FileInputStream(corpusFile), XMLStreamReaderType.WOODSTOX);
         CorpusReader corpusReader = new LGLCorpusReader(xmlStreamReader);
         Dictionary dictionary = new HashMapDictionary();
-        dictionary.load(corpusReader);
+        while(corpusReader.hasNextDocument()) {
+            Article article = (Article) corpusReader.getNextDocument();
+            Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
+            Iterator<Word> labelledWords = new LglLabeller(tokenizedWords, article.getToponyms());
+            dictionary.load(labelledWords);
+        }
         return dictionary;
     }
 
