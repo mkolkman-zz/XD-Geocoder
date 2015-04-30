@@ -53,7 +53,7 @@ public class MalletSvmClassifierTrainerTest {
 
     public static final String FEATURE_FILE = "/home/mike/data/xd-features.ser";
     public static final String LGL_CORPUS_FILE = "/home/mike/dev/MasterThesis/XD-Geocoder/geocoder/src/test/resources/core/lgl-multiple-articles-test.xml";
-    private static final String GEONAMES_GAZETTEER_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/gazetteers/geonames/allCountries.txt";
+    public static final String GEONAMES_GAZETTEER_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/gazetteers/geonames/allCountries.txt";
     public static final String EXPERIMENT_RESULTS_FILE = "/home/mike/data/xd-results.csv";
 
     public double WEIGHT_B = 65.0;

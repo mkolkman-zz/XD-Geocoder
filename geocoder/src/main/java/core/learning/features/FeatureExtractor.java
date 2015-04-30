@@ -4,6 +4,7 @@ import cc.mallet.types.Alphabet;
 import core.language.labeller.Labeller;
 import core.language.pos.PosTag;
 import core.language.pos.PosTagger;
+import core.language.word.DummyWord;
 import core.learning.LearningInstance;
 import core.learning.features.dictionary.*;
 import core.learning.features.gazetteer.IsInGazetteer;
@@ -58,9 +59,28 @@ public class FeatureExtractor {
 
         learningInstances = new ArrayList<LearningInstance>();
 
+        Word wordBefore = new DummyWord();
+        Word word = new DummyWord();
+        Word wordAfter = new DummyWord();
+
         while(wordIterator.hasNext()) {
-            Word word = wordIterator.next();
-            FeatureVector features = extractFeatures(word);
+            wordBefore = word;
+            word = wordAfter;
+            wordAfter = wordIterator.next();
+
+            if(word != null) {
+                FeatureVector features = extractFeatures(wordBefore, word, wordAfter);
+
+                learningInstances.add(new LearningInstance(word, features, word.getLabel()));
+            }
+        }
+
+        wordBefore = word;
+        word = wordAfter;
+        wordAfter = new DummyWord();
+
+        if(word != null) {
+            FeatureVector features = extractFeatures(wordBefore, word, wordAfter);
 
             learningInstances.add(new LearningInstance(word, features, word.getLabel()));
         }
@@ -68,7 +88,7 @@ public class FeatureExtractor {
         return learningInstances;
     }
 
-    protected FeatureVector extractFeatures(Word word) {
+    protected FeatureVector extractFeatures(Word wordBefore, Word word, Word wordAfter) {
         featureVector = new FeatureVector();
 
         //Form features
@@ -83,12 +103,19 @@ public class FeatureExtractor {
 
         //POS features
         for(PosTag posTag : PosTag.values()) {
+            featureVector.add(new HasPartOfSpeechTag(wordBefore, posTag));
+        }
+        for(PosTag posTag : PosTag.values()) {
             featureVector.add(new HasPartOfSpeechTag(word, posTag));
         }
-        featureVector.add(new PartOfSpeechTag(word));
+        for(PosTag posTag : PosTag.values()) {
+            featureVector.add(new HasPartOfSpeechTag(wordAfter, posTag));
+        }
 
         //Dictionary features
+        featureVector.add(new WordIndex(wordBefore, dictionary));
         featureVector.add(new WordIndex(word, dictionary));
+        featureVector.add(new WordIndex(wordAfter, dictionary));
         featureVector.add(new WordFrequency(word, dictionary));
         featureVector.add(new WordFraction(word, dictionary));
         featureVector.add(new BeginOfToponymFrequency(word, dictionary));
@@ -99,8 +126,12 @@ public class FeatureExtractor {
         featureVector.add(new UppercaseFraction(word, dictionary));
 
         //Gazetteer features
+        featureVector.add(new IsInGazetteer(wordBefore, gazetteer));
         featureVector.add(new IsInGazetteer(word, gazetteer));
+        featureVector.add(new IsInGazetteer(wordAfter, gazetteer));
+        featureVector.add(new IsPartialInGazetteer(wordBefore, gazetteer));
         featureVector.add(new IsPartialInGazetteer(word, gazetteer));
+        featureVector.add(new IsPartialInGazetteer(wordAfter, gazetteer));
 
         return featureVector;
     }
