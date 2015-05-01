@@ -13,6 +13,7 @@ import core.language.tokenizer.stanford.StanfordWordTokenizer;
 import core.language.word.Word;
 import core.learning.Label;
 import core.learning.LearningInstance;
+import core.learning.LearningInstanceExtractor;
 import core.learning.classifier.Classifier;
 import core.learning.classifier.ClassifierTrainer;
 import core.learning.features.DummyLocationGazetteer;
@@ -32,10 +33,7 @@ import org.junit.Test;
 import stanford.transformers.StanfordTransformer;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.StringReader;
+import java.io.*;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -49,15 +47,17 @@ public class MalletMaxEntClassifierTrainerTest {
     public static final String ENGLISH_TAGGER_MODEL = "/core/language/pos/english-left3words-distsim.tagger";
 
     @Test
-    public void testTraining_shortInstanceList() throws FileNotFoundException {
+    public void testTraining_shortInstanceList() throws IOException, ClassNotFoundException {
         WordTokenizer tokenizer = new StanfordWordTokenizer(new PTBTokenizer(new StringReader("The flight from Amsterdam-B-TOP to Washington-B-TOP D.C.-I-TOP took seven hours."), new WordTokenFactory(), ""));
         AnnotatedWordLabeller labeller = new AnnotatedWordLabeller(tokenizer);
         Dictionary dictionary = new HashMapDictionary();
         LocationGazetteer gazetteer = new DummyLocationGazetteer();
 
-        FeatureExtractor featureExtractor = new FeatureExtractor(labeller, dictionary, gazetteer);
+        FeatureExtractor featureExtractor = new FeatureExtractor(dictionary, gazetteer);
 
-        List<LearningInstance> learningInstances = featureExtractor.getLearningInstances();
+        LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
+
+        List<LearningInstance> learningInstances = learningInstanceExtractor.getLearningInstances();
 
         ClassifierTrainer trainer = new MalletMaxEntClassifierTrainer(new MalletInstanceListTransformer(new MalletInstanceTransformer(new MalletFeatureVectorTransformer())));
         Classifier classifier = trainer.train(learningInstances);
@@ -65,7 +65,7 @@ public class MalletMaxEntClassifierTrainerTest {
     }
 
     @Test
-    public void testTraining_LGLCorpusSample() throws FileNotFoundException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException {
+    public void testTraining_LGLCorpusSample() throws IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException, ClassNotFoundException {
         Dictionary dictionary = new HashMapDictionary();
         LocationGazetteer gazetteer = new DummyLocationGazetteer();
 
@@ -83,7 +83,7 @@ public class MalletMaxEntClassifierTrainerTest {
     }
 
     @Test
-    public void testTraining_LGLCorpus() throws FileNotFoundException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException {
+    public void testTraining_LGLCorpus() throws IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException, ClassNotFoundException {
         XMLStreamReader xmlStreamReader = XMLStreamReaderFactory.makeXMLStreamReader(new FileInputStream(LGL_ARTICLES_FILE), XMLStreamReaderType.WOODSTOX);
         CorpusReader corpusReader = new LGLCorpusReader(xmlStreamReader);
         Dictionary dictionary = new HashMapDictionary();
@@ -113,7 +113,7 @@ public class MalletMaxEntClassifierTrainerTest {
         }
     }
 
-    private List<LearningInstance> extractLearningInstances(Dictionary dictionary, LocationGazetteer gazetteer, CorpusReader corpusReader) throws ParseException {
+    private List<LearningInstance> extractLearningInstances(Dictionary dictionary, LocationGazetteer gazetteer, CorpusReader corpusReader) throws ParseException, IOException, ClassNotFoundException {
         List<LearningInstance> learningInstances = new ArrayList<LearningInstance>();
         while(corpusReader.hasNextDocument()) {
             Article article = (Article) corpusReader.getNextDocument();
@@ -123,8 +123,11 @@ public class MalletMaxEntClassifierTrainerTest {
             words = new StanfordPosTagger(words, tagger, new StanfordTransformer());
 
 
-            FeatureExtractor featureExtractor = new FeatureExtractor(words, dictionary, gazetteer);
-            learningInstances.addAll(featureExtractor.getLearningInstances());
+            FeatureExtractor featureExtractor = new FeatureExtractor(dictionary, gazetteer);
+
+            LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
+
+            learningInstances.addAll(learningInstanceExtractor.getLearningInstances());
         }
         return learningInstances;
     }

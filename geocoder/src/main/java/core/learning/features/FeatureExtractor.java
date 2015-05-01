@@ -30,65 +30,18 @@ public class FeatureExtractor {
 
     private Labeller labeller;
 
-    protected List<LearningInstance> learningInstances;
-
     private static Alphabet featureAlphabet;
     private FeatureVector featureVector;
 
     private String[] prefixes = new String[]{"aber", "ast", "auch", "auchter", "bal", "brad", "bre", "caer", "car", "cul", "cum", "dal", "din", "dol", "drum", "dun", "dum", "don", "doune", "fin", "inver", "inner", "kil", "kin", "kyle", "lang", "mynydd", "nan", "nans", "nant", "nor", "pen", "pit", "pol", "pont", "porth", "shep", "ship", "stan", "strath", "sud", "sut", "tre", "tilly", "tullie", "tulloch", "win", "lan", "lhan", "llan", "beck", "ac", "acc", "ock", "new", "saint", "fort", "grand", "south", "north", "san", "santa"};
     private String[] suffixes = new String[]{"bost", "carden", "caster", "chester", "cester", "ceter", "cot", "cott", "dale", "dean", "den", "don", "field", "firth", "firth", "ham", "ing", "keth", "cheth", "mouth", "ness", "pool", "port", "stead", "ster", "thwaite", "twatt", "wick", "wich", "wych", "wyke", "wick", "ay", "ey", "dubh", "dow", "dhu", "duff", "craig", "crag", "creag", "lin", "llyn", "toft", "worth", "worthy", "wardine", "by", "beck", "avon", "berg", "berry", "bourne", "burn", "burgh", "ville", "polis", "springs", "beach", "land", "ton", "ville", "spring", "city", "bay", "valley", "lake"};
 
-    public FeatureExtractor(Iterator<Word> wordIterator) {
-        this(wordIterator, null, null);
-    }
-
-    public FeatureExtractor(Iterator<Word> wordIterator, Dictionary dictionary, LocationGazetteer gazetteer) {
-        this.wordIterator = wordIterator;
+    public FeatureExtractor(Dictionary dictionary, LocationGazetteer gazetteer) {
         this.dictionary = dictionary;
         this.gazetteer = gazetteer;
     }
 
-    public List<LearningInstance> getLearningInstances() {
-        if(learningInstances == null) {
-            extractLearningInstances();
-        }
-        return learningInstances;
-    }
-
-    protected List<LearningInstance> extractLearningInstances() {
-
-        learningInstances = new ArrayList<LearningInstance>();
-
-        Word wordBefore = new DummyWord();
-        Word word = new DummyWord();
-        Word wordAfter = new DummyWord();
-
-        while(wordIterator.hasNext()) {
-            wordBefore = word;
-            word = wordAfter;
-            wordAfter = wordIterator.next();
-
-            if(word != null) {
-                FeatureVector features = extractFeatures(wordBefore, word, wordAfter);
-
-                learningInstances.add(new LearningInstance(word, features, word.getLabel()));
-            }
-        }
-
-        wordBefore = word;
-        word = wordAfter;
-        wordAfter = new DummyWord();
-
-        if(word != null) {
-            FeatureVector features = extractFeatures(wordBefore, word, wordAfter);
-
-            learningInstances.add(new LearningInstance(word, features, word.getLabel()));
-        }
-
-        return learningInstances;
-    }
-
-    protected FeatureVector extractFeatures(Word wordBefore, Word word, Word wordAfter) {
+    public FeatureVector extractFeatures(Word wordBefore, Word word, Word wordAfter) {
         featureVector = new FeatureVector();
 
         //Form features
@@ -113,9 +66,9 @@ public class FeatureExtractor {
         }
 
         //Dictionary features
-        featureVector.add(new WordIndex(wordBefore, dictionary));
-        featureVector.add(new WordIndex(word, dictionary));
-        featureVector.add(new WordIndex(wordAfter, dictionary));
+//        featureVector.add(new WordIndex(wordBefore, dictionary));
+//        featureVector.add(new WordIndex(word, dictionary));
+//        featureVector.add(new WordIndex(wordAfter, dictionary));
         featureVector.add(new WordFrequency(word, dictionary));
         featureVector.add(new WordFraction(word, dictionary));
         featureVector.add(new BeginOfToponymFrequency(word, dictionary));

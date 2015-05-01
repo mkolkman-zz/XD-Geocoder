@@ -6,6 +6,7 @@ import core.language.dictionary.HashMapDictionary;
 import core.language.tokenizer.WordTokenizer;
 import core.language.tokenizer.stanford.StanfordWordTokenizer;
 import core.learning.LearningInstance;
+import core.learning.LearningInstanceExtractor;
 import core.learning.classifier.Classifier;
 import core.learning.classifier.ClassifierTrainer;
 import core.learning.features.DummyLocationGazetteer;
@@ -18,6 +19,7 @@ import mallet.transformers.MalletInstanceTransformer;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
 
@@ -26,14 +28,16 @@ public class MalletCrfClassifierTrainerTest {
     private static final String GAZETTEER_INPUT_FILE = "D:\\Studie\\gazetteers\\geonames\\allCountries.txt";
 
     @Test
-    public void testTraining_shortInstanceList() throws FileNotFoundException {
+    public void testTraining_shortInstanceList() throws IOException, ClassNotFoundException {
         WordTokenizer tokenizer = new StanfordWordTokenizer(new PTBTokenizer(new StringReader("The flight from Amsterdam/B-TOP to Washington/B-TOP D.C./I-TOP took seven hours."), new WordTokenFactory(), ""));
         Dictionary dictionary = new HashMapDictionary();
         LocationGazetteer gazetteer = new DummyLocationGazetteer();
 
-        FeatureExtractor featureExtractor = new FeatureExtractor(tokenizer, dictionary, gazetteer);
+        FeatureExtractor featureExtractor = new FeatureExtractor(dictionary, gazetteer);
 
-        List<LearningInstance> learningInstances = featureExtractor.getLearningInstances();
+        LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
+
+        List<LearningInstance> learningInstances = learningInstanceExtractor.getLearningInstances();
 
         ClassifierTrainer trainer = new MalletCrfClassifierTrainer(new MalletInstanceListTransformer(new MalletInstanceTransformer(new MalletFeatureVectorTransformer())));
         Classifier classifier = trainer.train(learningInstances);
