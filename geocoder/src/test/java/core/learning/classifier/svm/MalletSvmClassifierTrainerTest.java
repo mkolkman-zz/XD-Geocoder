@@ -74,10 +74,10 @@ public class MalletSvmClassifierTrainerTest {
         PrintStream out = new PrintStream(new FileOutputStream(EXPERIMENT_RESULTS_FILE));
         System.setOut(out);
 
-        double[] gamma_list = new double[]{0.6, 0.75, 0.9};
-        double[] cost_list = new double[]{0.6, 0.75, 0.9};
+        double[] gamma_list = new double[]{0.75};
+        double[] cost_list = new double[]{0.75};
         double[] weight_b_list = new double[]{50, 60, 70};
-        double[] weight_i_list = new double[]{165};
+        double[] weight_i_list = new double[]{150, 165, 180};
         for (double gamma : gamma_list) {
             for (double cost : cost_list) {
                 for (double weight_b : weight_b_list) {
@@ -140,8 +140,8 @@ public class MalletSvmClassifierTrainerTest {
             Article article = (Article) corpusReader.getNextDocument();
             Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
 
-//            Iterator<Word> labelledWords = new LglLabeller(tokenizedWords, article.getToponyms());
-            Iterator<Word> labelledWords = new LglBinaryLabeller(tokenizedWords, article.getToponyms());
+            Iterator<Word> labelledWords = new LglLabeller(tokenizedWords, article.getToponyms());
+//            Iterator<Word> labelledWords = new LglBinaryLabeller(tokenizedWords, article.getToponyms());
             Iterator<Word> posTaggedWords = new StanfordPosTagger(labelledWords, tagger, new StanfordTransformer());
 
             learningInstanceExtractor.extractLearningInstances(posTaggedWords);
@@ -187,8 +187,8 @@ public class MalletSvmClassifierTrainerTest {
 
         Classifier classifier = trainer.train(trainingInstances, params);
 
-//        Evaluator evaluator = new LglEvaluator(classifier.trial(testInstances));
-        Evaluator evaluator = new LglBinaryEvaluator(classifier.trial(testInstances));
+        Evaluator evaluator = new LglEvaluator(classifier.trial(testInstances));
+//        Evaluator evaluator = new LglBinaryEvaluator(classifier.trial(testInstances));
 
         return evaluator.getPerformanceMetrics();
     }

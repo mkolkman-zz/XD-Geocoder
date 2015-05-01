@@ -8,6 +8,8 @@ public interface LocationGazetteer {
 
     boolean containsPartial(String text);
 
+    boolean containsInitial(String text);
+
     List<Location> getLocations(String toponym) throws Exception;
 
     void add(Location location);

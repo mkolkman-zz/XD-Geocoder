@@ -8,6 +8,7 @@ import core.language.word.DummyWord;
 import core.learning.LearningInstance;
 import core.learning.features.dictionary.*;
 import core.learning.features.gazetteer.IsInGazetteer;
+import core.learning.features.gazetteer.IsInitialInGazetteer;
 import core.learning.features.gazetteer.IsPartialInGazetteer;
 import core.learning.features.language.*;
 import core.geo.LocationGazetteer;
@@ -82,6 +83,9 @@ public class FeatureExtractor {
         featureVector.add(new IsInGazetteer(wordBefore, gazetteer));
         featureVector.add(new IsInGazetteer(word, gazetteer));
         featureVector.add(new IsInGazetteer(wordAfter, gazetteer));
+        featureVector.add(new IsInitialInGazetteer(wordBefore, gazetteer));
+        featureVector.add(new IsInitialInGazetteer(word, gazetteer));
+        featureVector.add(new IsInitialInGazetteer(wordAfter, gazetteer));
         featureVector.add(new IsPartialInGazetteer(wordBefore, gazetteer));
         featureVector.add(new IsPartialInGazetteer(word, gazetteer));
         featureVector.add(new IsPartialInGazetteer(wordAfter, gazetteer));

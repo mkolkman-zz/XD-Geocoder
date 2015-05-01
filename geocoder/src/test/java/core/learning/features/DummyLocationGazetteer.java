@@ -18,6 +18,11 @@ public class DummyLocationGazetteer implements LocationGazetteer {
     }
 
     @Override
+    public boolean containsInitial(String text) {
+        return false;
+    }
+
+    @Override
     public List<Location> getLocations(String toponym) {
         return null;
     }

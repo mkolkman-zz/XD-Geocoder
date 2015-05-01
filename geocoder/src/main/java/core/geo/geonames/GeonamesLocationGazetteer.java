@@ -23,6 +23,7 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
 
     private Map<String, List<Integer>> toponymToCandidatesIndex;
     private Map<String, List<Integer>> partialToponymToCandidatesIndex;
+    private Map<String, List<Integer>> initialToponymToCandidatesIndex;
 
     public GeonamesLocationGazetteer(CsvGazetteerReader gazetteerReader, CsvLocationParser locationParser) {
         this.gazetteerReader = gazetteerReader;
@@ -36,6 +37,7 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
         locations = new ArrayList<String>();
         toponymToCandidatesIndex = new HashMap<String, List<Integer>>();
         partialToponymToCandidatesIndex = new HashMap<String, List<Integer>>();
+        initialToponymToCandidatesIndex = new HashMap<String, List<Integer>>();
 
         try {
             int count = 0;
@@ -63,6 +65,11 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
     }
 
     @Override
+    public boolean containsInitial(String text) {
+        return initialToponymToCandidatesIndex.containsKey(text);
+    }
+
+    @Override
     public List<Location> getLocations(String toponym) throws Exception {
         throw new Exception("Not yet implemented");
     }
@@ -79,6 +86,12 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
         toponymToCandidatesIndex.get(toponym).add(locationIndex);
 
         String[] toponymParts = toponym.split(" ");
+
+        if( ! initialToponymToCandidatesIndex.containsKey(toponymParts[0])) {
+            initialToponymToCandidatesIndex.put(toponymParts[0], new ArrayList<Integer>());
+        }
+        initialToponymToCandidatesIndex.get(toponymParts[0]).add(locationIndex);
+
         for (String toponymPart : toponymParts) {
             if( ! partialToponymToCandidatesIndex.containsKey(toponymPart)) {
                 partialToponymToCandidatesIndex.put(toponymPart, new ArrayList<Integer>());
