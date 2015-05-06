@@ -3,7 +3,7 @@ package core.language.word;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.geo.Coordinate;
+import core.gazetteer.Coordinate;
 
 public class Toponym extends Word {
 

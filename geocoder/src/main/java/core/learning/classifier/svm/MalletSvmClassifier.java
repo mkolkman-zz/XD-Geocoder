@@ -3,26 +3,26 @@ package core.learning.classifier.svm;
 import cc.mallet.classify.Trial;
 import cc.mallet.types.Instance;
 import cc.mallet.types.InstanceList;
-import core.learning.Classification;
-import core.learning.LearningInstance;
+import core.learning.classifier.Classification;
+import core.learning.learning_instance.LearningInstance;
 import core.learning.classifier.Classifier;
-import mallet.transformers.MalletInstanceListTransformer;
+import transformers.learning_instance.MalletInstanceTransformer;
 
 import java.util.List;
 
 public class MalletSvmClassifier implements Classifier {
 
     private final cc.mallet.classify.Classifier classifier;
-    private final MalletInstanceListTransformer instanceListTransformer;
+    private final MalletInstanceTransformer instanceTransformer;
 
-    public MalletSvmClassifier(cc.mallet.classify.Classifier classifier, MalletInstanceListTransformer instanceListTransformer) {
+    public MalletSvmClassifier(cc.mallet.classify.Classifier classifier, MalletInstanceTransformer instanceTransformer) {
         this.classifier = classifier;
-        this.instanceListTransformer = instanceListTransformer;
+        this.instanceTransformer = instanceTransformer;
     }
 
     @Override
     public Classification classify(LearningInstance input) {
-        Instance instance = instanceListTransformer.getInstanceTransformer().toMalletInstance(input);
+        Instance instance = instanceTransformer.toMalletInstance(input);
 
         cc.mallet.classify.Classification classification = classifier.classify(instance);
         return null;
@@ -30,7 +30,7 @@ public class MalletSvmClassifier implements Classifier {
 
     @Override
     public Trial trial(List<LearningInstance> input) {
-        InstanceList instances = instanceListTransformer.toMalletInstanceList(input);
+        InstanceList instances = instanceTransformer.toMalletInstanceList(input);
 
         return new Trial(classifier, instances);
     }

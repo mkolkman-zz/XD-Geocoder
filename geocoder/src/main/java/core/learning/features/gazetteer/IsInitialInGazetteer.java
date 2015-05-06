@@ -1,6 +1,6 @@
 package core.learning.features.gazetteer;
 
-import core.geo.LocationGazetteer;
+import core.gazetteer.LocationGazetteer;
 import core.language.word.Word;
 import core.learning.features.Feature;
 

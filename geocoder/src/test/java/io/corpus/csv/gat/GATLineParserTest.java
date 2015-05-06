@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import io.corpus.csv.CsvTweetParser;
+import io.corpus.gat.GATTweetParser;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

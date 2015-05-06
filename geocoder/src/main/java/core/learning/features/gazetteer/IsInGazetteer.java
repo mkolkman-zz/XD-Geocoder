@@ -1,7 +1,7 @@
 package core.learning.features.gazetteer;
 
 import core.learning.features.Feature;
-import core.geo.LocationGazetteer;
+import core.gazetteer.LocationGazetteer;
 import core.language.word.Word;
 
 public class IsInGazetteer extends Feature {

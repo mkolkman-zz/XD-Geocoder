@@ -1,8 +1,8 @@
 package core.learning.evaluator.lgl;
 
 import cc.mallet.classify.Trial;
-import core.learning.Label;
-import core.learning.Metric;
+import core.learning.label.Label;
+import core.learning.evaluator.Metric;
 import core.learning.evaluator.Evaluator;
 
 import java.util.ArrayList;

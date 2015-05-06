@@ -1,6 +1,6 @@
 package io.gazetteer;
 
-import core.geo.Location;
+import core.gazetteer.Location;
 
 import java.text.ParseException;
 

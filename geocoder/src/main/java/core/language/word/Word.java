@@ -1,7 +1,7 @@
 package core.language.word;
 
 import core.language.pos.PosTag;
-import core.learning.Label;
+import core.learning.label.Label;
 
 import java.io.Serializable;
 

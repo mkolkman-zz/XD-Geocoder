@@ -2,7 +2,7 @@ package core.language.tokenizer.stanford;
 
 import core.language.tokenizer.WordTokenizer;
 import core.language.word.Word;
-import core.learning.Label;
+import core.learning.label.Label;
 import edu.stanford.nlp.process.PTBTokenizer;
 
 public class StanfordWordTokenizer implements WordTokenizer{

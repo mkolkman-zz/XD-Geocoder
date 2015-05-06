@@ -4,20 +4,16 @@ import cc.mallet.types.Alphabet;
 import core.language.labeller.Labeller;
 import core.language.pos.PosTag;
 import core.language.pos.PosTagger;
-import core.language.word.DummyWord;
-import core.learning.LearningInstance;
 import core.learning.features.dictionary.*;
 import core.learning.features.gazetteer.IsInGazetteer;
 import core.learning.features.gazetteer.IsInitialInGazetteer;
 import core.learning.features.gazetteer.IsPartialInGazetteer;
 import core.learning.features.language.*;
-import core.geo.LocationGazetteer;
+import core.gazetteer.LocationGazetteer;
 import core.language.dictionary.Dictionary;
 import core.language.word.Word;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Extracts a feature vector from each word retrieved from the WordTokenizer wordIterator.

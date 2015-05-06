@@ -1,7 +1,5 @@
 package core.learning.evaluator;
 
-import core.learning.Metric;
-
 import java.util.List;
 
 public abstract class Evaluator {

@@ -5,6 +5,7 @@ import java.text.ParseException;
 import io.corpus.csv.CsvTweetParser;
 import static org.junit.Assert.*;
 
+import io.corpus.gtt.GTTTweetParser;
 import org.junit.*;
 
 import core.language.document.tweet.Tweet;

@@ -1,6 +1,6 @@
 package io.gazetteer.csv.geonames;
 
-import core.geo.Location;
+import core.gazetteer.Location;
 import io.gazetteer.csv.CsvLocationParser;
 import java.text.ParseException;
 

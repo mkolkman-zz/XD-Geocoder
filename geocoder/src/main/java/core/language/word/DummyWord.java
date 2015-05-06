@@ -1,6 +1,6 @@
 package core.language.word;
 
-import core.learning.Label;
+import core.learning.label.Label;
 
 public class DummyWord extends Word {
 

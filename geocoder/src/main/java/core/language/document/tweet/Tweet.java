@@ -8,7 +8,7 @@ import java.util.List;
 
 import core.language.document.Document;
 import core.language.word.Toponym;
-import core.geo.Coordinate;
+import core.gazetteer.Coordinate;
 
 public class Tweet extends Document {
 

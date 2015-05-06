@@ -1,28 +1,31 @@
 package core.learning.classifier.svm;
 
 import ca.uwo.csd.ai.nlp.kernel.CustomKernel;
-import ca.uwo.csd.ai.nlp.kernel.LinearKernel;
 import ca.uwo.csd.ai.nlp.libsvm.svm_parameter;
+import ca.uwo.csd.ai.nlp.mallet.libsvm.SVMClassifier;
 import ca.uwo.csd.ai.nlp.mallet.libsvm.SVMClassifierTrainer;
 import cc.mallet.types.InstanceList;
-import core.learning.LearningInstance;
+import core.learning.learning_instance.LearningInstance;
 import core.learning.classifier.Classifier;
 import core.learning.classifier.ClassifierTrainer;
-import mallet.transformers.MalletInstanceListTransformer;
+import transformers.learning_instance.MalletInstanceTransformer;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-public class MalletSvmClassifierTrainer implements ClassifierTrainer {
+public class  MalletSvmClassifierTrainer implements ClassifierTrainer {
+
+    private MalletInstanceTransformer instanceTransformer;
 
     private CustomKernel kernel;
-    private MalletInstanceListTransformer instanceListTransformer;
+    private SVMClassifierTrainer trainer;
+    private SVMClassifier classifier;
 
-    public MalletSvmClassifierTrainer(CustomKernel kernel, MalletInstanceListTransformer instanceListTransformer) {
+    public MalletSvmClassifierTrainer(CustomKernel kernel, MalletInstanceTransformer instanceTransformer) {
         this.kernel = kernel;
-        this.instanceListTransformer = instanceListTransformer;
+        this.instanceTransformer = instanceTransformer;
     }
 
     @Override
@@ -31,16 +34,17 @@ public class MalletSvmClassifierTrainer implements ClassifierTrainer {
     }
 
     public Classifier train(List<LearningInstance> trainingData, svm_parameter params) {
-        InstanceList instances = instanceListTransformer.toMalletInstanceList(trainingData);
+        InstanceList instances = instanceTransformer.toMalletInstanceList(trainingData);
 
-        SVMClassifierTrainer trainer = new SVMClassifierTrainer(kernel);
+        trainer = new SVMClassifierTrainer(kernel);
 
         trainer.setParam(params);
 
         PrintStream out = System.out;
         System.setOut(new PrintStream(new DummyOutputStream()));
         try {
-            return new MalletSvmClassifier(trainer.train(instances), instanceListTransformer);
+            classifier = trainer.train(instances);
+            return new MalletSvmClassifier(classifier, instanceTransformer);
         } finally {
             System.setOut(out);
         }

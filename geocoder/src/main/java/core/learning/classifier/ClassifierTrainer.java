@@ -1,6 +1,6 @@
 package core.learning.classifier;
 
-import core.learning.LearningInstance;
+import core.learning.learning_instance.LearningInstance;
 
 import java.util.List;
 

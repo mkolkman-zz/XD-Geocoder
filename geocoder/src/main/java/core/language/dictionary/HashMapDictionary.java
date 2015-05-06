@@ -1,15 +1,8 @@
 package core.language.dictionary;
 
-import core.language.document.Document;
-import core.language.tokenizer.WordTokenizer;
-import core.language.tokenizer.stanford.StanfordWordTokenizer;
 import core.language.word.Word;
-import core.learning.Label;
-import edu.stanford.nlp.process.PTBTokenizer;
-import edu.stanford.nlp.process.WordTokenFactory;
-import io.corpus.CorpusReader;
+import core.learning.label.Label;
 
-import java.io.StringReader;
 import java.text.ParseException;
 import java.util.*;
 

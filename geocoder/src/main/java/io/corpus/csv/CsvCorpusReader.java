@@ -4,8 +4,8 @@ import java.io.*;
 import java.text.ParseException;
 
 import core.language.document.Document;
-import io.corpus.csv.gat.GATTweetParser;
-import io.corpus.csv.gtt.GTTTweetParser;
+import io.corpus.gat.GATTweetParser;
+import io.corpus.gtt.GTTTweetParser;
 import io.corpus.CorpusReader;
 
 public class CsvCorpusReader implements CorpusReader {

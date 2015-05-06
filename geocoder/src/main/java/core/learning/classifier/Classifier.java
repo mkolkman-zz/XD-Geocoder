@@ -1,8 +1,7 @@
 package core.learning.classifier;
 
 import cc.mallet.classify.Trial;
-import core.learning.Classification;
-import core.learning.LearningInstance;
+import core.learning.learning_instance.LearningInstance;
 
 import java.util.List;
 

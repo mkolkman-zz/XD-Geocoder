@@ -5,24 +5,24 @@ import cc.mallet.fst.CRFOptimizableByLabelLikelihood;
 import cc.mallet.fst.CRFTrainerByValueGradients;
 import cc.mallet.optimize.Optimizable;
 import cc.mallet.types.InstanceList;
-import core.learning.LearningInstance;
+import core.learning.learning_instance.LearningInstance;
 import core.learning.classifier.Classifier;
 import core.learning.classifier.ClassifierTrainer;
-import mallet.transformers.MalletInstanceListTransformer;
+import transformers.learning_instance.MalletInstanceTransformer;
 
 import java.util.List;
 
 public class MalletCrfClassifierTrainer implements ClassifierTrainer {
 
-    private MalletInstanceListTransformer instanceListTransformer;
+    private MalletInstanceTransformer instanceTransformer;
 
-    public MalletCrfClassifierTrainer(MalletInstanceListTransformer instanceListTransformer) {
-        this.instanceListTransformer = instanceListTransformer;
+    public MalletCrfClassifierTrainer(MalletInstanceTransformer instanceTransformer) {
+        this.instanceTransformer = instanceTransformer;
     }
 
     @Override
     public Classifier train(List<LearningInstance> input) {
-        InstanceList trainingData = instanceListTransformer.toMalletInstanceList(input);
+        InstanceList trainingData = instanceTransformer.toMalletInstanceList(input);
 
         CRF crf = new CRF(trainingData.getDataAlphabet(), trainingData.getTargetAlphabet());
         crf.addFullyConnectedStatesForLabels();

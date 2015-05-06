@@ -1,7 +1,7 @@
 package core.language.labeller;
 
 import core.language.word.Word;
-import core.learning.Label;
+import core.learning.label.Label;
 
 import java.util.Iterator;
 

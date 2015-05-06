@@ -1,19 +1,18 @@
 package core.learning.features;
 
-import core.geo.LocationGazetteer;
+import core.gazetteer.LocationGazetteer;
 import core.language.dictionary.Dictionary;
 import core.language.dictionary.HashMapDictionary;
 import core.language.tokenizer.WordTokenizer;
 import core.language.tokenizer.stanford.StanfordWordTokenizer;
-import core.learning.LearningInstance;
-import core.learning.LearningInstanceExtractor;
+import core.learning.learning_instance.LearningInstance;
+import core.learning.learning_instance.extractor.WordLearningInstanceExtractor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.WordTokenFactory;
 import io.gazetteer.csv.CsvGazetteerReader;
 import io.gazetteer.csv.CsvLocationParser;
 import org.junit.Test;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.List;
@@ -31,7 +30,7 @@ public class FeatureExtractorTest {
 
         FeatureExtractor featureExtractor = new FeatureExtractor(dictionary, gazetteer);
 
-        LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
+        WordLearningInstanceExtractor learningInstanceExtractor = new WordLearningInstanceExtractor(featureExtractor);
 
         List<LearningInstance> learningInstances = learningInstanceExtractor.getLearningInstances();
 

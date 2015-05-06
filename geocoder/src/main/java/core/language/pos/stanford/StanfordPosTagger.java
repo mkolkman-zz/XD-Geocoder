@@ -5,7 +5,7 @@ import core.language.word.Word;
 import core.language.word.stanford.StanfordWord;
 import edu.stanford.nlp.ling.TaggedWord;
 import edu.stanford.nlp.tagger.common.Tagger;
-import stanford.transformers.StanfordTransformer;
+import transformers.word.StanfordWordTransformer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -16,9 +16,9 @@ public class StanfordPosTagger implements PosTagger {
     private Iterator<Word> inputSentence;
     private Iterator<Word> outputSentence;
     private Tagger tagger;
-    private StanfordTransformer transformer;
+    private StanfordWordTransformer transformer;
 
-    public StanfordPosTagger(Iterator<Word> inputSentence, Tagger tagger, StanfordTransformer transformer) {
+    public StanfordPosTagger(Iterator<Word> inputSentence, Tagger tagger, StanfordWordTransformer transformer) {
         this.inputSentence = inputSentence;
         this.tagger = tagger;
         this.transformer = transformer;

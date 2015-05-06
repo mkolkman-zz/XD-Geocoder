@@ -1,7 +1,7 @@
 package core.learning.features;
 
-import core.geo.Location;
-import core.geo.LocationGazetteer;
+import core.gazetteer.Location;
+import core.gazetteer.LocationGazetteer;
 
 import java.util.List;
 

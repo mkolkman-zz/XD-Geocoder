@@ -3,9 +3,8 @@ package io.gazetteer.csv;
 import java.io.*;
 import java.text.ParseException;
 
-import core.geo.Location;
+import core.gazetteer.Location;
 import io.gazetteer.GazetteerReader;
-import io.gazetteer.csv.CsvLocationParser;
 import io.gazetteer.csv.geonames.GeonamesLocationParser;
 
 public class CsvGazetteerReader implements GazetteerReader {
