@@ -1,6 +1,7 @@
 package core.learning.emperical.setup;
 
 import core.language.document.news.Article;
+import core.language.labeller.lgl.BinaryLglLabeller;
 import core.language.labeller.lgl.LglLabeller;
 import core.language.pos.stanford.StanfordPosTagger;
 import core.language.tokenizer.stanford.StanfordWordTokenizer;
@@ -22,7 +23,7 @@ import java.text.ParseException;
 import java.util.Iterator;
 import java.util.List;
 
-public class CrfExperimentSetup extends ExperimentSetup {
+public class BinarySvmExperimentSetup extends ExperimentSetup {
 
     @Override
     List<LearningInstance> extractLearningInstances(String corpusFile, String gazetteerFile, String taggerFile) throws ParseException, IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ClassNotFoundException {
@@ -45,19 +46,18 @@ public class CrfExperimentSetup extends ExperimentSetup {
     }
 
     @Override
-    protected Iterator<Word> makeWordIterator(Article article) {
+    Iterator<Word> makeWordIterator(Article article) {
         Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
 
         return new LglLabeller(tokenizedWords, article.getToponyms());
     }
 
     @Override
-    protected Iterator<Word> makeWordIterator(Article article, MaxentTagger tagger) {
+    Iterator<Word> makeWordIterator(Article article, MaxentTagger tagger) {
         Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
 
-        Iterator<Word> labelledWords = new LglLabeller(tokenizedWords, article.getToponyms());
+        Iterator<Word> labelledWords = new BinaryLglLabeller(tokenizedWords, article.getToponyms());
 
         return new StanfordPosTagger(labelledWords, tagger, new StanfordWordTransformer());
     }
-
 }

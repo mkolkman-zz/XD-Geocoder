@@ -6,7 +6,7 @@ import core.language.dictionary.HashMapDictionary;
 import core.language.tokenizer.WordTokenizer;
 import core.language.tokenizer.stanford.StanfordWordTokenizer;
 import core.learning.learning_instance.LearningInstance;
-import core.learning.learning_instance.extractor.WordLearningInstanceExtractor;
+import core.learning.learning_instance.extractor.LearningInstanceExtractor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.WordTokenFactory;
 import io.gazetteer.csv.CsvGazetteerReader;
@@ -30,7 +30,7 @@ public class FeatureExtractorTest {
 
         FeatureExtractor featureExtractor = new FeatureExtractor(dictionary, gazetteer);
 
-        WordLearningInstanceExtractor learningInstanceExtractor = new WordLearningInstanceExtractor(featureExtractor);
+        LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
 
         List<LearningInstance> learningInstances = learningInstanceExtractor.getLearningInstances();
 

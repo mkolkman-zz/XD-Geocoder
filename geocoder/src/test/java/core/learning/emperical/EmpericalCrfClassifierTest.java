@@ -1,28 +1,29 @@
 package core.learning.emperical;
 
-import core.learning.classifier.Classifier;
-import core.learning.classifier.ClassifierTrainer;
+import cc.mallet.fst.PerClassAccuracyEvaluator;
 import core.learning.classifier.crf.MalletCrfClassifierTrainer;
+import core.learning.emperical.setup.CrfExperimentSetup;
 import core.learning.emperical.setup.ExperimentSetup;
-import core.learning.emperical.setup.SvmExperimentSetup;
-import core.learning.evaluator.Evaluator;
 import core.learning.evaluator.Metric;
-import core.learning.evaluator.lgl.LglEvaluator;
 import core.learning.learning_instance.LearningInstance;
 import io.corpus.xml.XMLStreamReaderFactory;
+import org.junit.Test;
 import transformers.feature_vector.MalletFeatureVectorTransformer;
 import transformers.learning_instance.MalletInstanceTransformer;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EmpericalCrfClassifierTest extends EmpericalClassifierTest {
 
+    @Test
     @Override
     public void testOnLglCorpus() throws IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException, ClassNotFoundException {
-        ExperimentSetup experimentSetup = new SvmExperimentSetup();
+        ExperimentSetup experimentSetup = new CrfExperimentSetup();
         List<LearningInstance> learningInstances = experimentSetup.getLearningInstances(
                 LGL_CORPUS_FILE,
                 GEONAMES_GAZETTEER_FILE,
@@ -34,16 +35,26 @@ public class EmpericalCrfClassifierTest extends EmpericalClassifierTest {
 
         List<Metric> metrics = doExperiment(0.75, 0.75, 60, 160, 1.0);
 
-        super.printPerformanceMetricsWithoutHeader(metrics);
+//        super.printPerformanceMetricsWithoutHeader(metrics);
+    }
+
+    protected void populateTrainingAndTestInstanceLists(List<LearningInstance> learningInstances) {
+        int splitIndex = learningInstances.size() / 10 * 3;
+        int endIndex = learningInstances.size() / 10 * 5;
+        Collections.shuffle(learningInstances);
+        trainingInstances = new ArrayList<LearningInstance>(learningInstances.subList(0, splitIndex));
+        testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex + 1, endIndex));
     }
 
     @Override
     public List<Metric> doExperiment(double gamma, double cost, double weight_b, double weight_i, double weight_o) {
-        ClassifierTrainer trainer = new MalletCrfClassifierTrainer(new MalletInstanceTransformer(new MalletFeatureVectorTransformer()));
-        Classifier classifier = trainer.train(trainingInstances);
+        MalletInstanceTransformer instanceTransformer = new MalletInstanceTransformer(new MalletFeatureVectorTransformer());
+        MalletCrfClassifierTrainer trainer = new MalletCrfClassifierTrainer(instanceTransformer);
 
-        Evaluator evaluator = new LglEvaluator(classifier.trial(testInstances));
+        trainer.setEvaluator(new PerClassAccuracyEvaluator(instanceTransformer.toMalletSequenceInstanceList(testInstances), "testing"));
 
-        return evaluator.getPerformanceMetrics();
+        trainer.train(trainingInstances);
+
+        return null;
     }
 }

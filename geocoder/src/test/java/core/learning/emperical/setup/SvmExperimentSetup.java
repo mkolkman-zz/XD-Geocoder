@@ -8,7 +8,6 @@ import core.language.word.Word;
 import core.learning.features.FeatureExtractor;
 import core.learning.learning_instance.LearningInstance;
 import core.learning.learning_instance.extractor.LearningInstanceExtractor;
-import core.learning.learning_instance.extractor.WordLearningInstanceExtractor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.WordTokenFactory;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
@@ -32,7 +31,7 @@ public class SvmExperimentSetup extends ExperimentSetup {
         MaxentTagger tagger = new MaxentTagger(taggerFile);
 
         FeatureExtractor featureExtractor = new FeatureExtractor(makeDictionary(makeCorpusReader(corpusFile)), makeGazetteer(gazetteerFile));
-        LearningInstanceExtractor learningInstanceExtractor = new WordLearningInstanceExtractor(featureExtractor);
+        LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
 
         while(corpusReader.hasNextDocument()) {
 

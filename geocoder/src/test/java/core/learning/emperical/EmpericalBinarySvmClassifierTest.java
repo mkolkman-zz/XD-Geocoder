@@ -4,6 +4,7 @@ import ca.uwo.csd.ai.nlp.kernel.CustomKernel;
 import ca.uwo.csd.ai.nlp.kernel.LinearKernel;
 import ca.uwo.csd.ai.nlp.kernel.RBFKernel;
 import ca.uwo.csd.ai.nlp.libsvm.svm_parameter;
+import core.learning.emperical.setup.BinarySvmExperimentSetup;
 import core.learning.emperical.setup.ExperimentSetup;
 import core.learning.learning_instance.LearningInstance;
 import core.learning.evaluator.Metric;
