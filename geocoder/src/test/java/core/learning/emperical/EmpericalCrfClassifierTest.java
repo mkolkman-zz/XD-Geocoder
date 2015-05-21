@@ -4,6 +4,7 @@ import cc.mallet.fst.PerClassAccuracyEvaluator;
 import core.learning.classifier.crf.MalletCrfClassifierTrainer;
 import core.learning.emperical.setup.CrfExperimentSetup;
 import core.learning.emperical.setup.ExperimentSetup;
+import core.learning.emperical.setup.R;
 import core.learning.evaluator.Metric;
 import core.learning.learning_instance.LearningInstance;
 import io.corpus.xml.XMLStreamReaderFactory;
@@ -22,14 +23,9 @@ public class EmpericalCrfClassifierTest extends EmpericalClassifierTest {
 
     @Test
     @Override
-    public void testOnLglCorpus() throws IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException, ClassNotFoundException {
+    public void testOnLglCorpus() throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
         ExperimentSetup experimentSetup = new CrfExperimentSetup();
-        List<LearningInstance> learningInstances = experimentSetup.getLearningInstances(
-                LGL_CORPUS_FILE,
-                GEONAMES_GAZETTEER_FILE,
-                getClass().getResource(ENGLISH_TAGGER_MODEL).toString(),
-                FEATURE_FILE
-        );
+        List<LearningInstance> learningInstances = experimentSetup.getLearningInstances(R.LGL_CORPUS_FILE);
 
         super.populateTrainingAndTestInstanceLists(learningInstances);
 

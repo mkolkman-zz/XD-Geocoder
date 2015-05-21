@@ -4,30 +4,29 @@ import ca.uwo.csd.ai.nlp.kernel.CustomKernel;
 import ca.uwo.csd.ai.nlp.kernel.LinearKernel;
 import ca.uwo.csd.ai.nlp.kernel.RBFKernel;
 import ca.uwo.csd.ai.nlp.libsvm.svm_parameter;
-import core.learning.emperical.setup.ExperimentSetup;
-import core.learning.emperical.setup.GazetteerFactory;
-import core.learning.emperical.setup.R;
-import core.learning.emperical.setup.LglExperimentSetup;
-import core.learning.learning_instance.LearningInstance;
-import core.learning.evaluator.Metric;
 import core.learning.classifier.Classifier;
 import core.learning.classifier.svm.MalletSvmClassifierTrainer;
+import core.learning.emperical.setup.*;
 import core.learning.evaluator.Evaluator;
+import core.learning.evaluator.Metric;
 import core.learning.evaluator.lgl.LglEvaluator;
+import core.learning.learning_instance.LearningInstance;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import io.corpus.xml.XMLStreamReaderFactory;
 import io.learning_instance.LearningInstanceReader;
 import io.learning_instance.LearningInstanceWriter;
+import org.junit.Test;
 import transformers.feature_vector.MalletFeatureVectorTransformer;
 import transformers.learning_instance.MalletInstanceTransformer;
-import org.junit.Test;
 
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class EmpericalSvmClassifierTest extends EmpericalClassifierTest {
+public class EmpericalCrossDomainSvmClassifierTest extends EmpericalClassifierTest {
 
     MalletSvmClassifierTrainer trainer;
 
@@ -35,40 +34,45 @@ public class EmpericalSvmClassifierTest extends EmpericalClassifierTest {
     @Test
     public void testOnLglCorpus() throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
 
-        ExperimentSetup experimentSetup = new LglExperimentSetup(
+        ExperimentSetup experimentSetup;
+        Map<String, List<LearningInstance>> learningInstances = new HashMap<String, List<LearningInstance>>();
+
+        experimentSetup = new LglExperimentSetup(
                 new GazetteerFactory(R.GEONAMES_GAZETTEER_FILE),
                 new MaxentTagger(getClass().getResource(R.ENGLISH_TAGGER_MODEL).toString()),
                 new LearningInstanceReader(R.LGL_FEATURE_FILE),
                 new LearningInstanceWriter(R.LGL_FEATURE_FILE)
         );
-        List<LearningInstance> learningInstances = experimentSetup.getLearningInstances(R.LGL_CORPUS_FILE);
+        learningInstances.put("LGL", experimentSetup.getLearningInstances(R.LGL_CORPUS_FILE));
 
-        super.populateTrainingAndTestInstanceLists(learningInstances);
+        experimentSetup = new GatExperimentSetup(
+                new GazetteerFactory(R.GEONAMES_GAZETTEER_FILE),
+                new MaxentTagger(getClass().getResource(R.ENGLISH_TAGGER_MODEL).toString()),
+                new LearningInstanceReader(R.GAT_FEATURE_FILE),
+                new LearningInstanceWriter(R.GAT_FEATURE_FILE)
+        );
+        learningInstances.put("GAT", experimentSetup.getLearningInstances(R.GAT_CORPUS_FILE));
 
         PrintStream out = new PrintStream(new FileOutputStream(R.EXPERIMENT_RESULTS_FILE));
         System.setOut(out);
 
-        double[] gamma_list = new double[]{0.1, 0.25, 0.5, 0.75, 1.0, 2.0};
-        double[] cost_list = new double[]{10, 100, 1000};
-        double[] weight_b_list = new double[]{60};
-        double[] weight_i_list = new double[]{150};
-        for (double gamma : gamma_list) {
-            for (double cost : cost_list) {
-                for (double weight_b : weight_b_list) {
-                    for(double weight_i : weight_i_list) {
-                        System.out.print(gamma + ", ");
-                        System.out.print(cost + ", ");
-                        System.out.print(weight_b + ", ");
-                        System.out.print(weight_i + ", ");
-                        System.out.print(1.0 + ", ");
+        String[] trainingList = new String[]{"GAT", "LGL"};
+        String[] testList = new String[]{"GAT", "LGL"};
 
-                        List<Metric> metrics = doExperiment(gamma, cost, weight_b, weight_i, 1.0);
+        for (String training : trainingList) {
+            for (String test : testList) {
+                    super.populateTrainingInstanceList(learningInstances.get(training));
+                    super.populateTestInstanceList(learningInstances.get(test));
 
-                        super.printPerformanceMetricsWithoutHeader(metrics);
-                    }
-                }
+                    List<Metric> metrics = doExperiment();
+                    System.out.print(training + ", " + test + ", ");
+                    super.printPerformanceMetricsWithoutHeader(metrics);
             }
         }
+    }
+
+    public List<Metric> doExperiment() {
+        return doExperiment(0.75, 1, 50, 160, 1);
     }
 
     @Override

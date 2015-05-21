@@ -46,15 +46,10 @@ public class EmpericalBinarySvmClassifierTest extends EmpericalClassifierTest {
 
     @Override
     @Test
-    public void testOnLglCorpus() throws IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException, ClassNotFoundException {
+    public void testOnLglCorpus() throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
 
         ExperimentSetup experimentSetup = new BinarySvmExperimentSetup();
-        List<LearningInstance> learningInstances = experimentSetup.getLearningInstances(
-                LGL_CORPUS_FILE,
-                GEONAMES_GAZETTEER_FILE,
-                getClass().getResource(ENGLISH_TAGGER_MODEL).toString(),
-                FEATURE_FILE
-        );
+        List<LearningInstance> learningInstances = experimentSetup.getLearningInstances(LGL_CORPUS_FILE);
 
         super.populateTrainingAndTestInstanceLists(learningInstances);
 

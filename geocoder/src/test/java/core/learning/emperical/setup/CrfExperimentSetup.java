@@ -1,5 +1,6 @@
 package core.learning.emperical.setup;
 
+import core.language.document.Document;
 import core.language.document.news.Article;
 import core.language.labeller.lgl.LglLabeller;
 import core.language.pos.stanford.StanfordPosTagger;
@@ -10,6 +11,7 @@ import core.learning.learning_instance.LearningInstance;
 import core.learning.learning_instance.extractor.LearningInstanceExtractor;
 import edu.stanford.nlp.process.PTBTokenizer;
 import edu.stanford.nlp.process.WordTokenFactory;
+import edu.stanford.nlp.tagger.common.Tagger;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import io.corpus.CorpusReader;
 import io.corpus.xml.XMLStreamReaderFactory;
@@ -25,12 +27,12 @@ import java.util.List;
 public class CrfExperimentSetup extends ExperimentSetup {
 
     @Override
-    List<LearningInstance> extractLearningInstances(String corpusFile, String gazetteerFile, String taggerFile) throws ParseException, IOException, XMLStreamException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ClassNotFoundException {
+    List<LearningInstance> extractLearningInstances(String corpusFile) throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
         CorpusReader corpusReader = makeCorpusReader(corpusFile);
 
-        MaxentTagger tagger = new MaxentTagger(taggerFile);
+        MaxentTagger tagger = new MaxentTagger();
 
-        FeatureExtractor featureExtractor = new FeatureExtractor(makeDictionary(makeCorpusReader(corpusFile)), makeGazetteer(gazetteerFile));
+        FeatureExtractor featureExtractor = new FeatureExtractor(makeDictionary(makeCorpusReader(corpusFile)), null);
         LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
 
         while(corpusReader.hasNextDocument()) {
@@ -45,17 +47,17 @@ public class CrfExperimentSetup extends ExperimentSetup {
     }
 
     @Override
-    protected Iterator<Word> makeWordIterator(Article article) {
-        Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
+    protected Iterator<Word> makeWordIterator(Document document) {
+        Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(document.getText()), new WordTokenFactory(), ""));
 
-        return new LglLabeller(tokenizedWords, article.getToponyms());
+        return new LglLabeller(tokenizedWords, document.getToponyms());
     }
 
     @Override
-    protected Iterator<Word> makeWordIterator(Article article, MaxentTagger tagger) {
-        Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(article.getText()), new WordTokenFactory(), ""));
+    protected Iterator<Word> makeWordIterator(Document document, Tagger tagger) {
+        Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(document.getText()), new WordTokenFactory(), ""));
 
-        Iterator<Word> labelledWords = new LglLabeller(tokenizedWords, article.getToponyms());
+        Iterator<Word> labelledWords = new LglLabeller(tokenizedWords, document.getToponyms());
 
         return new StanfordPosTagger(labelledWords, tagger, new StanfordWordTransformer());
     }

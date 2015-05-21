@@ -5,7 +5,7 @@ import java.util.List;
 
 import core.gazetteer.Coordinate;
 
-public class Toponym extends Word {
+public class Toponym {
 
 	private int start;
 	private int end;
@@ -16,11 +16,13 @@ public class Toponym extends Word {
 	public Toponym() {}
 
 	public Toponym(String text) {
-		super(text);
+		this.text = text;
 	}
 
 	public Toponym(int start, int end, String text) {
-		super(start, end, text);
+		this.start = start;
+		this.end = end;
+		this.text = text;
 	}
 
 	public String getText() {

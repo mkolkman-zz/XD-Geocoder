@@ -2,6 +2,8 @@ package core.gazetteer.geonames;
 
 import core.gazetteer.Location;
 import core.gazetteer.LocationGazetteer;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.THashMap;
 import io.gazetteer.csv.CsvGazetteerReader;
 import io.gazetteer.csv.CsvLocationParser;
 
@@ -20,9 +22,9 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
 
     private List<String> locations;
 
-    private Map<String, List<Integer>> toponymToCandidatesIndex;
-    private Map<String, List<Integer>> partialToponymToCandidatesIndex;
-    private Map<String, List<Integer>> initialToponymToCandidatesIndex;
+    private Map<String, TIntArrayList> toponymToCandidatesIndex;
+    private Map<String, TIntArrayList> partialToponymToCandidatesIndex;
+    private Map<String, TIntArrayList> initialToponymToCandidatesIndex;
 
     public GeonamesLocationGazetteer(CsvGazetteerReader gazetteerReader, CsvLocationParser locationParser) {
         this.gazetteerReader = gazetteerReader;
@@ -34,9 +36,9 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
         System.out.println("Loading geonames gazetteer...");
 
         locations = new ArrayList<String>();
-        toponymToCandidatesIndex = new HashMap<String, List<Integer>>();
-        partialToponymToCandidatesIndex = new HashMap<String, List<Integer>>();
-        initialToponymToCandidatesIndex = new HashMap<String, List<Integer>>();
+        toponymToCandidatesIndex = new THashMap<String, TIntArrayList>();
+        partialToponymToCandidatesIndex = new THashMap<String, TIntArrayList>();
+        initialToponymToCandidatesIndex = new THashMap<String, TIntArrayList>();
 
         try {
             int count = 0;
@@ -80,20 +82,20 @@ public class GeonamesLocationGazetteer implements LocationGazetteer {
 
         String toponym = location.getName();
         if( ! toponymToCandidatesIndex.containsKey(toponym)) {
-            toponymToCandidatesIndex.put(toponym, new ArrayList<Integer>());
+            toponymToCandidatesIndex.put(toponym, new TIntArrayList(1));
         }
         toponymToCandidatesIndex.get(toponym).add(locationIndex);
 
         String[] toponymParts = toponym.split(" ");
 
         if( ! initialToponymToCandidatesIndex.containsKey(toponymParts[0])) {
-            initialToponymToCandidatesIndex.put(toponymParts[0], new ArrayList<Integer>());
+            initialToponymToCandidatesIndex.put(toponymParts[0], new TIntArrayList(1));
         }
         initialToponymToCandidatesIndex.get(toponymParts[0]).add(locationIndex);
 
         for (String toponymPart : toponymParts) {
             if( ! partialToponymToCandidatesIndex.containsKey(toponymPart)) {
-                partialToponymToCandidatesIndex.put(toponymPart, new ArrayList<Integer>());
+                partialToponymToCandidatesIndex.put(toponymPart, new TIntArrayList(1));
             }
             partialToponymToCandidatesIndex.get(toponymPart).add(locationIndex);
         }

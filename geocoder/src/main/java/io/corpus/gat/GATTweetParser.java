@@ -32,8 +32,8 @@ public class GATTweetParser implements CsvTweetParser {
 	
 	/**
 	 * Parses input of the form "tp{#Warren[41,-75]8299577,5106052}tptp{NJ[41,-75]5101760}tp" 
-	 * @param input
-	 * @return
+	 * @param input input of the form "tp{#Warren[41,-75]8299577,5106052}tptp{NJ[41,-75]5101760}tp"
+	 * @return List<Toponym>
 	 */
 	private List<Toponym> parseToponyms(String input) {
 		String[] toponyms = input.trim().replaceAll("(?i)^tp\\{", "").replaceAll("(?i)\\}tp$", "").split("(?i)\\}tptp\\{");

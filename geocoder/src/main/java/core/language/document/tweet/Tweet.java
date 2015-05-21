@@ -45,7 +45,6 @@ public class Tweet extends Document {
 	
 	public void setToponyms(List<Toponym> toponyms) {
 		this.toponyms = toponyms;
-		buildTgnMessage();		
 	}
 
 	private void buildTgnMessage() {
