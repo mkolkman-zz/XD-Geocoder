@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<corpus>
+  <doc id="higg.amauthors.ie.txt">
+    <s>
+      <w tok="These"/>
+      <w tok="brief"/>
+      <w tok="papers"/>
+      <w tok="were"/>
+      <w tok="originally"/>
+      <w tok="published"/>
+      <w tok="in"/>
+      <w tok="The"/>
+      <w tok="literary"/>
+      <w tok="world"/>
+      <w tok="tgn,7013445-Boston"/>
+      <w tok="and"/>
+      <w tok="are"/>
+      <w tok="here"/>
+      <w tok="reprinted"/>
+      <w tok="in"/>
+      <w tok="a"/>
+      <w tok="revised"/>
+      <w tok="form"/>
+      <w tok="with"/>
+      <w tok="some"/>
+      <w tok="additions"/>
+    </s>
+    <s>
+      <w tok="tgn,7013527-Cambridge"/>
+      <w tok="Mass"/>
+      <w tok="Dec"/>
+      <w tok="i"/>
+      <w tok="1879"/>
+    </s>
+    <s>
+      <w tok="I"/>
+      <w tok="do"/>
+      <w tok="not"/>
+      <w tok="know"/>
+      <w tok="when"/>
+      <w tok="I"/>
+      <w tok="have"/>
+      <w tok="been"/>
+      <w tok="more"/>
+      <w tok="surprised"/>
+      <w tok="than"/>
+      <w tok="on"/>
+      <w tok="being"/>
+      <w tok="asked"/>
+      <w tok="the"/>
+      <w tok="other"/>
+      <w tok="day"/>
+      <w tok="whether"/>
+      <w tok="Hawthorne"/>
+      <w tok="was"/>
+      <w tok="not"/>
+      <w tok="physically"/>
+      <w tok="very"/>
+      <w tok="small"/>
+    </s>
+    <s>
+      <w tok="It"/>
+      <w tok="seemed"/>
+      <w tok="at"/>
+      <w tok="the"/>
+      <w tok="moment"/>
+      <w tok="utterly"/>
+      <w tok="unconceivable"/>
+      <w tok="that"/>
+      <w tok="he"/>
+      <w tok="should"/>
+      <w tok="have"/>
+      <w tok="been"/>
+      <w tok="any"/>
+      <w tok="thing"/>
+      <w tok="less"/>
+      <w tok="than"/>
+      <w tok="the"/>
+      <w tok="sombre"/>
+      <w tok="and"/>
+      <w tok="commanding"/>
+      <w tok="personage"/>
+      <w tok="he"/>
+      <w tok="was"/>
+      <w tok="Ellery"/>
+      <w tok="Channing"/>
+      <w tok="well"/>
+      <w tok="describes"/>
+      <w tok="him"/>
+      <w tok="as"/>
+      <w tok="a"/>
+    </s>
+    <s>
+      <w tok="Tall"/>
+      <w tok="compacted"/>
+      <w tok="figure"/>
+      <w tok="ably"/>
+      <w tok="strung"/>
+      <w tok="To"/>
+      <w tok="urge"/>
+      <w tok="the"/>
+      <w tok="Indian"/>
+      <w tok="chase"/>
+      <w tok="or"/>
+      <w tok="point"/>
+      <w tok="the"/>
+      <w tok="way"/>
+    </s>
+    <s>
+      <w tok="One"/>
+      <w tok="can"/>
+      <w tok="imagine"/>
+      <w tok="any"/>
+      <w tok="amount"/>
+      <w tok="of"/>
+      <w tok="positive"/>
+      <w tok="energy"/>
+      <w tok="that"/>
+      <w tok="of"/>
+      <w tok="Napoleon"/>
+      <w tok="Bonaparte"/>
+      <w tok="for"/>
+      <w tok="instance"/>
+      <w tok="mdash"/>
+      <w tok="as"/>
+      <w tok="included"/>
+      <w tok="within"/>
+      <w tok="a"/>
+      <w tok="small"/>
+      <w tok="physical"/>
+      <w tok="frame"/>
+    </s>
+    <s>
+      <w tok="But"/>
+      <w tok="the"/>
+      <w tok="self-contained"/>
+      <w tok="purpose"/>
+      <w tok="of"/>
+      <w tok="Hawthorne"/>
+      <w tok="the"/>
+      <w tok="large"/>
+      <w tok="resources"/>
+      <w tok="the"/>
+      <w tok="waiting"/>
+      <w tok="power,--these"/>
+      <w tok="seem"/>
+      <w tok="to"/>
+      <w tok="the"/>
+      <w tok="imagination"/>
+      <w tok="to"/>
+      <w tok="imply"/>
+      <w tok="an"/>
+      <w tok="ample"/>
+      <w tok="basis"/>
+      <w tok="of"/>
+      <w tok="physical"/>
+      <w tok="life"/>
+      <w tok="and"/>
+      <w tok="certainly"/>
+      <w tok="his"/>
+      <w tok="stately"/>
+      <w tok="and"/>
+      <w tok="noble"/>
+      <w tok="port"/>
+      <w tok="is"/>
+      <w tok=""/>
+      <w tok="inseparable"/>
+      <w tok="in"/>
+      <w tok="my"/>
+      <w tok="memory"/>
+      <w tok="from"/>
+      <w tok="these"/>
+      <w tok="characteristics"/>
+    </s>
+    <s>
+      <w tok="Vivid"/>
+      <w tok="as"/>
+      <w tok="this"/>
+      <w tok="impression"/>
+      <w tok="is"/>
+      <w tok="I"/>
+      <w tok="yet"/>
+      <w tok="saw"/>
+      <w tok="him"/>
+      <w tok="but"/>
+      <w tok="twice"/>
+      <w tok="and"/>
+      <w tok="never"/>
+      <w tok="spoke"/>
+      <w tok="to"/>
+      <w tok="him"/>
+      <w tok="I"/>
+      <w tok="first"/>
+      <w tok="met"/>
+      <w tok="him"/>
+      <w tok="on"/>
+      <w tok="a"/>
+      <w tok="summer"/>
+      <w tok="morning"/>
+      <w tok="in"/>
+      <toponym term="Concord">
+        <candidates>
+          <cand id="90785" lat="-33.84722" long="151.10381" type="CITY" admin1code="AU.02"/>
+          <cand id="327262" lat="45.45298" long="-62.79047" type="CITY" admin1code="CA.07"/>
+          <cand id="327263" lat="43.800110000000004" long="-79.48291000000002" type="CITY" admin1code="CA.08"/>
+          <cand id="1327071" lat="12.11667" long="-61.73333" type="CITY" admin1code="GD.04"/>
+          <cand id="1963738" lat="18.215509999999995" long="-77.21933" type="CITY" admin1code="JM.09"/>
+          <cand id="2749685" lat="-45.89838" long="170.4501" type="CITY" admin1code="NZ.F7"/>
+          <cand id="2837859" lat="11.695280000000002" long="125.24139" type="CITY" admin1code="PH.08"/>
+          <cand id="3554807" lat="10.23396" long="-61.48796" type="CITY" admin1code="TT.PED"/>
+          <cand id="3621697" lat="34.55371" long="-88.98256" type="CITY" admin1code="US.MS"/>
+          <cand id="3621921" lat="35.86869" long="-84.14186" type="CITY" admin1code="US.TN"/>
+          <cand id="3622718" lat="33.372060000000005" long="-85.80552" type="CITY" admin1code="US.AL"/>
+          <cand id="3622719" lat="33.545669999999994" long="-87.73029" type="CITY" admin1code="US.AL"/>
+          <cand id="3622720" lat="33.46761" long="-87.03111" type="CITY" admin1code="US.AL"/>
+          <cand id="3622721" lat="34.52732" long="-87.45390999999998" type="CITY" admin1code="US.AL"/>
+          <cand id="3622722" lat="33.13512000000001" long="-85.50273" type="CITY" admin1code="US.AL"/>
+          <cand id="3629170" lat="35.66369" long="-91.84764" type="CITY" admin1code="US.AR"/>
+          <cand id="3629171" lat="35.47064" long="-94.25771" type="CITY" admin1code="US.AR"/>
+          <cand id="3634560" lat="39.76428" long="-75.5427" type="CITY" admin1code="US.DE"/>
+          <cand id="3634561" lat="38.64206" long="-75.5552" type="CITY" admin1code="US.DE"/>
+          <cand id="3636567" lat="30.657699999999995" long="-84.36491" type="CITY" admin1code="US.FL"/>
+          <cand id="3636568" lat="30.563809999999997" long="-84.04545" type="CITY" admin1code="US.FL"/>
+          <cand id="3641178" lat="33.09124" long="-84.43742" type="CITY" admin1code="US.GA"/>
+          <cand id="3641179" lat="32.33126" long="-84.34242" type="CITY" admin1code="US.GA"/>
+          <cand id="3641180" lat="32.14016" long="-84.3813" type="CITY" admin1code="US.GA"/>
+          <cand id="3647819" lat="39.81671" long="-90.37290000000002" type="CITY" admin1code="US.IL"/>
+          <cand id="3656341" lat="37.56089" long="-86.4597" type="CITY" admin1code="US.KY"/>
+          <cand id="3656342" lat="38.68619" long="-83.49102" type="CITY" admin1code="US.KY"/>
+          <cand id="3656343" lat="37.07228" long="-88.70005" type="CITY" admin1code="US.KY"/>
+          <cand id="3656344" lat="38.72285" long="-84.30076999999999" type="CITY" admin1code="US.KY"/>
+          <cand id="3656347" lat="38.31452" long="-83.78103" type="CITY" admin1code="US.KY"/>
+          <cand id="3660874" lat="32.955400000000004" long="-91.44678" type="CITY" admin1code="US.LA"/>
+          <cand id="3660878" lat="32.313489999999994" long="-92.49458999999999" type="CITY" admin1code="US.LA"/>
+          <cand id="3666981" lat="38.80261000000001" long="-75.7891" type="CITY" admin1code="US.MD"/>
+          <cand id="3666982" lat="39.36927" long="-77.5011" type="CITY" admin1code="US.MD"/>
+          <cand id="3666984" lat="39.56317" long="-76.07217" type="CITY" admin1code="US.MD"/>
+          <cand id="3675211" lat="39.0331" long="-91.96768" type="CITY" admin1code="US.MO"/>
+          <cand id="3675212" lat="36.2934" long="-89.70091" type="CITY" admin1code="US.MO"/>
+          <cand id="3675213" lat="38.5245" long="-90.35734" type="CITY" admin1code="US.MO"/>
+          <cand id="3684946" lat="35.40888" long="-80.58158" type="CITY" admin1code="US.NC"/>
+          <cand id="3684947" lat="34.83767" long="-78.1161" type="CITY" admin1code="US.NC"/>
+          <cand id="3684948" lat="36.44597" long="-79.0664" type="CITY" admin1code="US.NC"/>
+          <cand id="3684949" lat="35.34457" long="-81.82093" type="CITY" admin1code="US.NC"/>
+          <cand id="3684950" lat="34.98295000000001" long="-78.41667" type="CITY" admin1code="US.NC"/>
+          <cand id="3684951" lat="35.87984" long="-82.32263" type="CITY" admin1code="US.NC"/>
+          <cand id="3693287" lat="39.02201000000001" long="-84.08021" type="CITY" admin1code="US.OH"/>
+          <cand id="3701559" lat="34.55455" long="-82.64624" type="CITY" admin1code="US.SC"/>
+          <cand id="3701560" lat="35.05014" long="-81.06451999999999" type="CITY" admin1code="US.SC"/>
+          <cand id="3707101" lat="35.929230000000004" long="-88.36588000000002" type="CITY" admin1code="US.TN"/>
+          <cand id="3707102" lat="35.97868" long="-88.83312" type="CITY" admin1code="US.TN"/>
+          <cand id="3707103" lat="36.23006" long="-87.76863" type="CITY" admin1code="US.TN"/>
+          <cand id="3707104" lat="35.59757" long="-84.90995" type="CITY" admin1code="US.TN"/>
+          <cand id="3707105" lat="35.74146" long="-86.55499" type="CITY" admin1code="US.TN"/>
+          <cand id="3714567" lat="31.12353" long="-94.2527" type="CITY" admin1code="US.TX"/>
+          <cand id="3714568" lat="32.07016000000001" long="-95.04633" type="CITY" admin1code="US.TX"/>
+          <cand id="3714569" lat="31.524899999999995" long="-96.05691" type="CITY" admin1code="US.TX"/>
+          <cand id="3714570" lat="33.11456" long="-96.15609" type="CITY" admin1code="US.TX"/>
+          <cand id="3714571" lat="31.256850000000004" long="-96.14441" type="CITY" admin1code="US.TX"/>
+          <cand id="3714572" lat="31.916559999999997" long="-94.58854" type="CITY" admin1code="US.TX"/>
+          <cand id="3714573" lat="32.82541" long="-94.91077" type="CITY" admin1code="US.TX"/>
+          <cand id="3722207" lat="36.95709" long="-77.79861" type="CITY" admin1code="US.VA"/>
+          <cand id="3722208" lat="37.34264000000001" long="-78.97502" type="CITY" admin1code="US.VA"/>
+          <cand id="3722209" lat="37.36348" long="-76.61857000000002" type="CITY" admin1code="US.VA"/>
+          <cand id="3722210" lat="38.47317999999999" long="-77.54443" type="CITY" admin1code="US.VA"/>
+          <cand id="3729886" lat="39.41481" long="-79.81784" type="CITY" admin1code="US.WV"/>
+          <cand id="3743683" lat="41.326159999999994" long="-84.94524" type="CITY" admin1code="US.IN"/>
+          <cand id="3743684" lat="40.29337" long="-86.83751000000001" type="CITY" admin1code="US.IN"/>
+          <cand id="3745831" lat="42.46037" long="-71.34895" type="CITY" admin1code="US.MA"/>
+          <cand id="3751606" lat="42.17782" long="-84.64302" type="CITY" admin1code="US.MI"/>
+          <cand id="3756093" lat="44.14746" long="-92.83631000000001" type="CITY" admin1code="US.MN"/>
+          <cand id="3762863" lat="42.38361" long="-96.98838" type="CITY" admin1code="US.NE"/>
+          <cand id="3764989" lat="43.20814" long="-71.53757000000002" type="CITY" admin1code="US.NH" selected="yes"/>
+          <cand id="3769342" lat="40.60815999999999" long="-74.08431" type="CITY" admin1code="US.NY"/>
+          <cand id="3769344" lat="42.53534" long="-78.73086" type="CITY" admin1code="US.NY"/>
+          <cand id="3776217" lat="40.08615999999999" long="-84.57857" type="CITY" admin1code="US.OH"/>
+          <cand id="3776218" lat="41.67449" long="-81.22455" type="CITY" admin1code="US.OH"/>
+          <cand id="3776219" lat="40.14312" long="-82.63794999999999" type="CITY" admin1code="US.OH"/>
+          <cand id="3781709" lat="40.25175" long="-77.70027" type="CITY" admin1code="US.PA"/>
+          <cand id="3781710" lat="40.02232" long="-76.13079" type="CITY" admin1code="US.PA"/>
+          <cand id="3793397" lat="44.42894999999999" long="-71.89009000000001" type="CITY" admin1code="US.VT"/>
+          <cand id="3795190" lat="43.06945" long="-88.59871" type="CITY" admin1code="US.WI"/>
+          <cand id="3799004" lat="41.89256" long="-79.73477" type="CITY" admin1code="US.PA"/>
+          <cand id="3802648" lat="37.97798" long="-122.03107" type="CITY" admin1code="US.CA"/>
+          <cand id="3817449" lat="45.584630000000004" long="-115.68374" type="CITY" admin1code="US.ID"/>
+          <cand id="3823560" lat="45.40429" long="-122.63759" type="CITY" admin1code="US.OR"/>
+        </candidates>
+      </toponym>
+      <w tok="as"/>
+      <w tok="he"/>
+      <w tok="was"/>
+      <w tok="walking"/>
+      <w tok="along"/>
+      <w tok="the"/>
+      <w tok="road"/>
+      <w tok="near"/>
+      <w tok="the"/>
+      <w tok="Old"/>
+      <w tok="Manse"/>
+      <w tok="with"/>
+      <w tok="his"/>
+      <w tok="wife"/>
+      <w tok="by"/>
+      <w tok="his"/>
+      <w tok="side"/>
+      <w tok="and"/>
+      <w tok="a"/>
+      <w tok="noble-looking"/>
+      <w tok="baby-boy"/>
+      <w tok="in"/>
+      <w tok="a"/>
+      <w tok="little"/>
+      <w tok="wagon"/>
+      <w tok="which"/>
+      <w tok="the"/>
+      <w tok="father"/>
+      <w tok="was"/>
+      <w tok="pushing"/>
+    </s>
+    <s>
+      <w tok="I"/>
+      <w tok="remember"/>
+      <w tok="him"/>
+      <w tok="as"/>
+      <w tok="tall"/>
+      <w tok="firm"/>
+      <w tok="and"/>
+      <w tok="strong"/>
+      <w tok="in"/>
+      <w tok="bearing"/>
+      <w tok="his"/>
+      <w tok="wife"/>
+      <w tok="looked"/>
+      <w tok="pensive"/>
+      <w tok="and"/>
+      <w tok="dreamy"/>
+      <w tok="as"/>
+      <w tok="she"/>
+      <w tok="indeed"/>
+      <w tok="was"/>
+      <w tok="then"/>
+      <w tok="and"/>
+      <w tok="always"/>
+      <w tok="the"/>
+      <w tok="child"/>
+      <w tok="was"/>
+      <w tok="Julian"/>
+      <w tok="then"/>
+      <w tok="known"/>
+      <w tok="among"/>
+      <w tok="the"/>
+      <w tok="neighbors"/>
+      <w tok="as"/>
+      <w tok="the"/>
+      <w tok="Prince"/>
+    </s>
+    <s>
+      <w tok="When"/>
+      <w tok="I"/>
+      <w tok="passed"/>
+      <w tok="Hawthorne"/>
+      <w tok="lifted"/>
+      <w tok="upon"/>
+      <w tok="me"/>
+      <w tok="his"/>
+      <w tok="great"/>
+      <w tok="gray"/>
+      <w tok="eyes"/>
+      <w tok="with"/>
+      <w tok="a"/>
+      <w tok="look"/>
+      <w tok="too"/>
+      <w tok="keen"/>
+      <w tok="to"/>
+      <w tok="seem"/>
+      <w tok="indifferent"/>
+      <w tok="too"/>
+      <w tok="shy"/>
+      <w tok="to"/>
+      <w tok="be"/>
+      <w tok="sympathetic-and"/>
+      <w tok="that"/>
+      <w tok="was"/>
+      <w tok="all"/>
+      <w tok="But"/>
+      <w tok="it"/>
+      <w tok="comes"/>
+      <w tok="back"/>
+      <w tok="to"/>
+      <w tok="memory"/>
+      <w tok="like"/>
+      <w tok="that"/>
+      <w tok="one"/>
+      <w tok="glimpse"/>
+      <w tok="of"/>
+      <w tok="Shelley"/>
+      <w tok="which"/>
+      <w tok="Browning"/>
+      <w tok="describes"/>
+      <w tok="and"/>
+      <w tok="which"/>
+      <w tok="he"/>
+      <w tok="likens"/>
+      <w tok="to"/>
+      <w tok="the"/>
+      <w tok="day"/>
+      <w tok="when"/>
+      <w tok="he"/>
+      <w tok="found"/>
+      <w tok="an"/>
+      <w tok="eagle's"/>
+      <w tok="feather"/>
+    </s>
+    <s>
+      <w tok="Again"/>
+      <w tok="I"/>
+      <w tok="met"/>
+      <w tok="Hawthorne"/>
+      <w tok="at"/>
+      <w tok="one"/>
+      <w tok="of"/>
+      <w tok="the"/>
+      <w tok="sessions"/>
+      <w tok="of"/>
+      <w tok="a"/>
+      <w tok="short-lived"/>
+      <w tok="literary"/>
+      <w tok="club"/>
+      <w tok="and"/>
+      <w tok="I"/>
+      <w tok="recall"/>
+      <w tok="the"/>
+      <w tok="imperturbable"/>
+      <w tok="dignity"/>
+      <w tok="and"/>
+      <w tok="patience"/>
+      <w tok="with"/>
+      <w tok="which"/>
+      <w tok="he"/>
+      <w tok="sat"/>
+      <w tok="through"/>
+      <w tok="a"/>
+      <w tok="vexatious"/>
+      <w tok="discussion"/>
+      <w tok="whose"/>
+      <w tok="details"/>
+      <w tok="seemed"/>
+      <w tok="as"/>
+      <w tok="much"/>
+      <w tok="dwarfed"/>
+      <w tok="by"/>
+      <w tok="his"/>
+      <w tok="presence"/>
+      <w tok="as"/>
+      <w tok="if"/>
+      <w tok="he"/>
+      <w tok="had"/>
+      <w tok="been"/>
+      <w tok="a"/>
+      <w tok="statue"/>
+      <w tok="of"/>
+      <w tok="Olympian"/>
+      <w tok="Zeus"/>
+    </s>
+    <s>
+      <w tok="After"/>
+      <w tok="his"/>
+      <w tok="death"/>
+      <w tok="I"/>
+      <w tok="had"/>
+      <w tok="a"/>
+      <w tok="brief"/>
+      <w tok="but"/>
+      <w tok="intimate"/>
+      <w tok="acquaintance"/>
+      <w tok="with"/>
+      <w tok="that"/>
+      <w tok="rare"/>
+      <w tok="person"/>
+      <w tok="Mrs"/>
+      <w tok="Hawthorne"/>
+      <w tok="and"/>
+      <w tok="with"/>
+      <w tok="one"/>
+      <w tok=""/>
+      <w tok="still"/>
+      <w tok="more"/>
+      <w tok="finely"/>
+      <w tok="organized"/>
+      <w tok="and"/>
+      <w tok="born"/>
+      <w tok="to"/>
+      <w tok="a"/>
+      <w tok="destiny"/>
+      <w tok="of"/>
+      <w tok="sadness,--their"/>
+      <w tok="elder"/>
+      <w tok="daughter"/>
+    </s>
+    <s>
+      <w tok="I"/>
+      <w tok="have"/>
+      <w tok="staid"/>
+      <w tok="at"/>
+      <w tok="The"/>
+      <w tok="Wayside"/>
+      <w tok="occupying"/>
+      <w tok="a"/>
+      <w tok="room"/>
+      <w tok="in"/>
+      <w tok="the"/>
+      <w tok="small"/>
+      <w tok="tower"/>
+      <w tok="built"/>
+      <w tok="by"/>
+      <w tok="Hawthorne"/>
+      <w tok="and"/>
+      <w tok="containing"/>
+      <w tok="his"/>
+      <w tok="lofty"/>
+      <w tok="and"/>
+      <w tok="then"/>
+      <w tok="deserted"/>
+      <w tok="study"/>
+      <w tok="which"/>
+      <w tok="still"/>
+      <w tok="bore"/>
+      <w tok="upon"/>
+      <w tok="its"/>
+      <w tok="wall"/>
+      <w tok="the"/>
+      <w tok="Tennysonian"/>
+      <w tok="motto"/>
+      <w tok="There"/>
+      <w tok="is"/>
+      <w tok="no"/>
+      <w tok="joy"/>
+      <w tok="but"/>
+      <w tok="calm"/>
+      <w tok="this"/>
+      <w tok="having"/>
+      <w tok="been"/>
+      <w tok="inscribed"/>
+      <w tok="however"/>
+      <w tok="not"/>
+      <w tok="by"/>
+      <w tok="himself"/>
+      <w tok="but"/>
+      <w tok="by"/>
+      <w tok="his"/>
+      <w tok="son"/>
+      <w tok="It"/>
+      <w tok="is"/>
+      <w tok="not"/>
+      <w tok="my"/>
+      <w tok="purpose"/>
+      <w tok="to"/>
+      <w tok="dwell"/>
+      <w tok="upon"/>
+      <w tok="the"/>
+      <w tok="facts"/>
+      <w tok="of"/>
+      <w tok="private"/>
+      <w tok="life"/>
+      <w tok="and"/>
+      <w tok="these"/>
+      <w tok="circumstances"/>
+      <w tok="are"/>
+      <w tok="mentioned"/>
+      <w tok="only"/>
+      <w tok="because"/>
+      <w tok="it"/>
+      <w tok="is"/>
+      <w tok="well"/>
+      <w tok="to"/>
+      <w tok="know"/>
+      <w tok="at"/>
+      <w tok="what"/>
+      <w tok="angle"/>
+      <w tok="of"/>
+      <w tok="incidence"/>
+      <w tok="any"/>
+      <w tok="critic"/>
+      <w tok="has"/>
+      <w tok="been"/>
+      <w tok="touched"/>
+      <w tok="by"/>
+      <w tok="the"/>
+      <w tok="personality"/>
+      <w tok="of"/>
+      <w tok="a"/>
+      <w tok="great"/>
+      <w tok="author"/>
+    </s>
+    <s>
+      <w tok="Perhaps"/>
+      <w tok="it"/>
+      <w tok="always"/>
+      <w tok="appears"/>
+      <w tok="to"/>
+      <w tok="men"/>
+      <w tok="as"/>
+      <w tok="they"/>
+      <w tok="grow"/>
+      <w tok="older"/>
+      <w tok="that"/>
+      <w tok="there"/>
+      <w tok="was"/>
+      <w tok="rather"/>
+      <w tok="more"/>
+      <w tok="of"/>
+      <w tok="positive"/>
+      <w tok="force"/>
+      <w tok="and"/>
+      <w tok="vitality"/>
+      <w tok="in"/>
+      <w tok="their"/>
+      <w tok="own"/>
+      <w tok="generation"/>
+      <w tok="and"/>
+      <w tok="among"/>
+      <w tok="their"/>
+      <w tok="immediate"/>
+      <w tok="predecessors"/>
+      <w tok="than"/>
+      <w tok="among"/>
+      <w tok="those"/>
+      <w tok="just"/>
+      <w tok="coming"/>
+      <w tok="on"/>
+      <w tok="the"/>
+      <w tok="stage"/>
+    </s>
+    <s>
+      <w tok="This"/>
+      <w tok="may"/>
+      <w tok="be"/>
+      <w tok="the"/>
+      <w tok="reason"/>
+      <w tok="why"/>
+      <w tok="there"/>
+      <w tok="seems"/>
+      <w tok="to"/>
+      <w tok="me"/>
+      <w tok="a"/>
+      <w tok="perpetual"/>
+      <w tok="sense"/>
+      <w tok="of"/>
+      <w tok="grasp"/>
+      <w tok="and"/>
+      <w tok="vigor"/>
+      <w tok="in"/>
+      <w tok="Hawthorne's"/>
+      <w tok="most"/>
+      <w tok="delicate"/>
+      <w tok="sketches"/>
+      <w tok="while"/>
+      <w tok="much"/>
+      <w tok="of"/>
+      <w tok="the"/>
+      <w tok="most"/>
+      <w tok="graceful"/>
+      <w tok="writing"/>
+      <w tok="now"/>
+      <w tok="done"/>
+      <w tok="in"/>
+      <w tok="America"/>
+      <w tok="makes"/>
+      <w tok="no"/>
+      <w tok="such"/>
+      <w tok="impression"/>
+      <w tok="but"/>
+      <w tok="either"/>
+      <w tok="seems"/>
+      <w tok="like"/>
+      <w tok="dainty"/>
+      <w tok="confectionery"/>
+      <w tok="or"/>
+      <w tok="like"/>
+      <w tok="carving"/>
+      <w tok="minute"/>
+      <w tok="heads"/>
+      <w tok="on"/>
+      <w tok="cherry-stones"/>
+    </s>
+    <s>
+      <w tok="In"/>
+      <w tok="England"/>
+      <w tok="the"/>
+      <w tok="tendency"/>
+      <w tok="is"/>
+      <w tok="just"/>
+      <w tok="now"/>
+      <w tok="to"/>
+      <w tok="the"/>
+      <w tok="opposite"/>
+      <w tok="fault,--to"/>
+      <w tok="a"/>
+      <w tok="distrust"/>
+      <w tok="of"/>
+      <w tok="all"/>
+      <w tok="nice"/>
+      <w tok="attention"/>
+      <w tok="to"/>
+      <w tok="form"/>
+      <w tok="in"/>
+      <w tok="writing"/>
+      <w tok="as"/>
+      <w tok="being"/>
+      <w tok="necessarily"/>
+      <w tok="a"/>
+      <w tok="weakness"/>
+    </s>
+    <s>
+      <w tok="Hawthorne"/>
+      <w tok="happily"/>
+      <w tok="escaped"/>
+      <w tok="both"/>
+      <w tok="these"/>
+      <w tok="dangerous"/>
+      <w tok="alternatives"/>
+      <w tok="and"/>
+      <w tok=""/>
+      <w tok="indeed"/>
+      <w tok="it"/>
+      <w tok="is"/>
+      <w tok="hard"/>
+      <w tok="to"/>
+      <w tok="see"/>
+      <w tok="that"/>
+      <w tok="his"/>
+      <w tok="genius"/>
+      <w tok="was"/>
+      <w tok="much"/>
+      <w tok="affected"/>
+      <w tok="by"/>
+      <w tok="his"/>
+      <w tok="surroundings"/>
+      <w tok="after"/>
+      <w tok="all"/>
+      <w tok="He"/>
+      <w tok="had"/>
+      <w tok="to"/>
+      <w tok="be"/>
+      <w tok="sure"/>
+      <w tok="the"/>
+      <w tok="conscientious"/>
+      <w tok="fidelity"/>
+      <w tok="of"/>
+      <w tok="Puritanism"/>
+      <w tok="in"/>
+      <w tok="his"/>
+      <w tok="veins"/>
+      <w tok="a"/>
+      <w tok="thing"/>
+      <w tok="equally"/>
+      <w tok="important"/>
+      <w tok="for"/>
+      <w tok="literature"/>
+      <w tok="and"/>
+      <w tok="for"/>
+      <w tok="life"/>
+      <w tok="without"/>
+      <w tok="it"/>
+      <w tok="he"/>
+      <w tok="might"/>
+      <w tok="have"/>
+      <w tok="lavished"/>
+      <w tok="and"/>
+      <w tok="wasted"/>
+      <w tok="himself"/>
+      <w tok="like"/>
+      <w tok="Poe"/>
+      <w tok="He"/>
+      <w tok="had"/>
+      <w tok="what"/>
+      <w tok="Emerson"/>
+      <w tok="once"/>
+      <w tok="described"/>
+      <w tok="as"/>
+      <w tok="the"/>
+      <w tok="still"/>
+      <w tok="living"/>
+      <w tok="merit"/>
+      <w tok="of"/>
+      <w tok="the"/>
+      <w tok="oldest"/>
+      <w tok="New"/>
+      <w tok="England"/>
+      <w tok="families"/>
+    </s>
+    <s>
+      <w tok="The"/>
+      <w tok="value"/>
+      <w tok="of"/>
+      <w tok="the"/>
+      <w tok="material"/>
+      <w tok="to"/>
+      <w tok="be"/>
+      <w tok="found"/>
+      <w tok="in"/>
+      <w tok="contemporary"/>
+      <w tok="American"/>
+      <w tok="life"/>
+      <w tok="he"/>
+      <w tok="never"/>
+      <w tok="fully"/>
+      <w tok="recognized"/>
+      <w tok="but"/>
+      <w tok="he"/>
+      <w tok="was"/>
+      <w tok="the"/>
+      <w tok="first"/>
+      <w tok="person"/>
+      <w tok="to"/>
+      <w tok="see"/>
+      <w tok="that"/>
+      <w tok="we"/>
+      <w tok="really"/>
+      <w tok="have"/>
+      <w tok="for"/>
+      <w tok="romantic"/>
+      <w tok="purposes"/>
+      <w tok="a"/>
+      <w tok="past"/>
+      <w tok="two"/>
+      <w tok="hundred"/>
+      <w tok="years"/>
+      <w tok="being"/>
+      <w tok="really"/>
+      <w tok="quite"/>
+      <w tok="enough"/>
+      <w tok="to"/>
+      <w tok="constitute"/>
+      <w tok="antiquity"/>
+    </s>
+    <s>
+      <w tok="This"/>
+      <w tok="was"/>
+      <w tok="what"/>
+      <w tok="his"/>
+      <w tok="environment"/>
+      <w tok="gave"/>
+      <w tok="him"/>
+      <w tok="and"/>
+      <w tok="this"/>
+      <w tok="was"/>
+      <w tok="much"/>
+    </s>
+    <s>
+      <w tok="But"/>
+      <w tok="after"/>
+      <w tok="all"/>
+      <w tok="his"/>
+      <w tok="artistic"/>
+      <w tok="standard"/>
+      <w tok="was"/>
+      <w tok="his"/>
+      <w tok="own"/>
+      <w tok="there"/>
+      <w tok="was"/>
+      <w tok="nobody"/>
+      <w tok="except"/>
+      <w tok="Irving"/>
+      <w tok="to"/>
+      <w tok="teach"/>
+      <w tok="him"/>
+      <w tok="any"/>
+      <w tok="thing"/>
+      <w tok="in"/>
+      <w tok="that"/>
+      <w tok="way"/>
+      <w tok="and"/>
+      <w tok="Irving's"/>
+      <w tok="work"/>
+      <w tok="lay"/>
+      <w tok="rather"/>
+      <w tok="on"/>
+      <w tok="the"/>
+      <w tok="surface"/>
+      <w tok="and"/>
+      <w tok="could"/>
+      <w tok="be"/>
+      <w tok="no"/>
+      <w tok="model"/>
+      <w tok="for"/>
+      <w tok="Hawthorne's"/>
+      <w tok="Yet"/>
+      <w tok="from"/>
+      <w tok="the"/>
+      <w tok="time"/>
+      <w tok="when"/>
+      <w tok="the"/>
+      <w tok="latter"/>
+      <w tok="began"/>
+      <w tok="to"/>
+      <w tok="write"/>
+      <w tok="for"/>
+      <w tok="The"/>
+      <w tok="Token"/>
+      <w tok="at"/>
+      <w tok="twenty-three"/>
+      <w tok="his"/>
+      <w tok="powers"/>
+      <w tok="of"/>
+      <w tok="execution"/>
+      <w tok="as"/>
+      <w tok="of"/>
+      <w tok="thought"/>
+      <w tok="appear"/>
+      <w tok="to"/>
+      <w tok="have"/>
+      <w tok="been"/>
+      <w tok="full-grown"/>
+    </s>
+    <s>
+      <w tok="The"/>
+      <w tok="quiet"/>
+      <w tok="ease"/>
+      <w tok="is"/>
+      <w tok="there"/>
+      <w tok="the"/>
+      <w tok="pellucid"/>
+      <w tok="language"/>
+      <w tok="the"/>
+      <w tok="haunting"/>
+      <w tok="quality"/>
+      <w tok="these"/>
+      <w tok="gifts"/>
+      <w tok="were"/>
+      <w tok="born"/>
+      <w tok=""/>
+      <w tok="in"/>
+      <w tok="him"/>
+      <w tok="we"/>
+      <w tok="cannot"/>
+      <w tok="trace"/>
+      <w tok="them"/>
+      <w tok="back"/>
+      <w tok="to"/>
+      <w tok="any"/>
+      <w tok="period"/>
+      <w tok="of"/>
+      <w tok="formation"/>
+    </s>
+  </doc>
+</corpus>
