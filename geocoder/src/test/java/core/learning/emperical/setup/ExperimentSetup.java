@@ -11,6 +11,7 @@ import io.corpus.CorpusReader;
 import io.corpus.csv.CsvCorpusReader;
 import io.corpus.gat.GATTweetParser;
 import io.corpus.lgl.LGLCorpusReader;
+import io.corpus.trconll.TRConllCorpusReader;
 import io.corpus.xml.XMLStreamReader;
 import io.corpus.xml.XMLStreamReaderFactory;
 import io.corpus.xml.XMLStreamReaderType;
@@ -57,14 +58,20 @@ public abstract class ExperimentSetup {
         if(corpusFile.equals(R.GAT_CORPUS_FILE)) {
             return new CsvCorpusReader(new BufferedReader(new FileReader(corpusFile)), new GATTweetParser());
         }
+        if(corpusFile.equals(R.CWAR_CORPUS_FILE)) {
+            XMLStreamReader xmlStreamReader = XMLStreamReaderFactory.makeXMLStreamReader(new FileInputStream(corpusFile), XMLStreamReaderType.WOODSTOX);
+            return new TRConllCorpusReader(xmlStreamReader);
+        }
         throw new Exception("Corpus file not supported");
     }
 
     Dictionary makeDictionary(CorpusReader corpusReader) throws XMLStreamException, FileNotFoundException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException {
         Dictionary dictionary = new HashMapDictionary();
+        int i = 0;
         while(corpusReader.hasNextDocument()) {
             Document document = corpusReader.getNextDocument();
-
+            System.out.println("Loading document " + i);
+            i++;
             dictionary.load(makeWordIterator(document));
         }
         return dictionary;

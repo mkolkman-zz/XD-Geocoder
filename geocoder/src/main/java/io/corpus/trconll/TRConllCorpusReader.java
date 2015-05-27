@@ -2,10 +2,8 @@ package io.corpus.trconll;
 
 import core.language.document.Document;
 import core.language.document.historic.HistoricDocument;
-import core.language.document.news.Article;
 import core.language.word.Toponym;
 import core.language.word.Word;
-import core.learning.label.Label;
 import io.corpus.CorpusReader;
 import io.corpus.xml.XMLStreamReader;
 
@@ -28,10 +26,7 @@ public class TRConllCorpusReader implements CorpusReader {
 
     private int eventType = 0;
 
-    private HistoricDocument document;
-    private String currentElement;
-    private boolean seenEndTag;
-    private Word word;
+    private int wordIndex = 0;
 
     public TRConllCorpusReader(XMLStreamReader xmlStreamReader) {
         streamReader = xmlStreamReader;
@@ -59,146 +54,79 @@ public class TRConllCorpusReader implements CorpusReader {
     @Override
     public Document getNextDocument() throws ParseException {
         try {
-            return parseDocument();
+            return parseWords();
         } catch (XMLStreamException e) {
             throw new ParseException(e.getMessage(), e.getLocation().getCharacterOffset());
         }
     }
 
-    private Document parseDocument() throws XMLStreamException, ParseException {
-        document = new HistoricDocument();
+    private Document parseWords() throws XMLStreamException, ParseException {
+        HistoricDocument document = new HistoricDocument();
+        List<Word> words = new ArrayList<Word>();
+        List<Toponym> toponyms = new ArrayList<Toponym>();
         while(streamReader.hasNext()) {
             eventType = streamReader.next();
-            switch(eventType) {
-                case XMLEvent.START_ELEMENT:
-                    currentElement = streamReader.getTag();
-                    seenEndTag = false;
-                    if(currentElement.equals(DOCUMENT_TAG)) {
-                        parseSentence();
-                    }
-                    break;
-                case XMLEvent.END_ELEMENT:
-                    currentElement = streamReader.getTag();
-                    seenEndTag = true;
-                    if(currentElement.equals(DOCUMENT_TAG)){
-                        return document;
-                    }
-                    break;
-            }
-        }
-        throw new ParseException("Reached end without seeing expected " + DOCUMENT_TAG + " tag", streamReader.getCharacterLocation());
-    }
 
-    private void parseSentence() throws XMLStreamException, ParseException {
-        List<Word> words = new ArrayList<Word>();
-        while(hasNextWord()) {
-            words.add(getNextWord());
-        }
-        document.setWords(words);
-    }
-
-    private boolean hasNextWord() throws XMLStreamException {
-        while (streamReader.hasNext()) {
-            eventType = streamReader.next();
             if(eventType == XMLEvent.START_ELEMENT && streamReader.getTag().equals(WORD_TAG)) {
-                return true;
+                words.add(parseWord());
             }
             if(eventType == XMLEvent.START_ELEMENT && streamReader.getTag().equals(TOPONYM_TAG)) {
-                return true;
+                words.add(parseToponym());
+                toponyms.add(parseCandidates());
             }
             if(eventType == XMLEvent.END_ELEMENT && streamReader.getTag().equals(DOCUMENT_TAG)) {
-                return false;
+                document.setWords(words);
+                document.setToponyms(toponyms);
+                return document;
             }
         }
-        return false;
+        throw new ParseException("No endtag for document found", 0);
     }
 
-    public Word getNextWord() throws ParseException {
-        try {
-            if(currentElement.equals(WORD_TAG)) {
-                return parseWord();
-            } else{
-                return parseToponym();
-            }
-        } catch (XMLStreamException e) {
-            throw new ParseException(e.getMessage(), e.getLocation().getCharacterOffset());
-        }
+    private Word parseWord() {
+        String tok = streamReader.getAttributeValue("tok");
+
+        Word word = new Word(tok);
+        word.setStart(wordIndex);
+        word.setEnd(wordIndex + tok.length());
+
+        wordIndex+= tok.length();
+
+        return word;
     }
 
-    private Word parseWord() throws XMLStreamException, ParseException {
-        word = new Word();
+    private Word parseToponym() {
+        String term = streamReader.getAttributeValue("term");
+
+        Word word = new Word(term);
+        word.setStart(wordIndex);
+        word.setEnd(wordIndex + term.length());
+
+        wordIndex+= term.length();
+
+        return word;
+    }
+
+    private Toponym parseCandidates() throws ParseException, XMLStreamException {
+        String term = streamReader.getAttributeValue("term");
+
+        Toponym toponym = new Toponym(term);
+        toponym.setStart(wordIndex);
+        toponym.setEnd(wordIndex + term.length());
 
         while(streamReader.hasNext()) {
             eventType = streamReader.next();
-            switch(eventType) {
-                case XMLEvent.START_ELEMENT:
-                    currentElement = streamReader.getTag();
-                    seenEndTag = false;
 
-                    String text = streamReader.getAttributeValue("tok");
-                    word.setText(text);
-                    break;
-                case XMLEvent.END_ELEMENT:
-                    currentElement = streamReader.getTag();
-                    seenEndTag = true;
-                    if(currentElement.equals(WORD_TAG)){
-                        return word;
-                    }
-                    break;
-            }
-        }
-        throw new ParseException("MISTAKE", 0);
-    }
-
-    private Word parseToponym() throws XMLStreamException, ParseException {
-        word = new Word();
-
-        while(streamReader.hasNext()) {
-            eventType = streamReader.next();
-            switch(eventType) {
-                case XMLEvent.START_ELEMENT:
-                    currentElement = streamReader.getTag();
-                    seenEndTag = false;
-
-                    String text = streamReader.getAttributeValue("term");
-                    word.setText(text);
-
-                    parseCandidates();
-                    break;
-                case XMLEvent.END_ELEMENT:
-                    currentElement = streamReader.getTag();
-                    seenEndTag = true;
-                    if(currentElement.equals(TOPONYM_TAG)){
-                        return word;
-                    }
-                    break;
-            }
-        }
-        throw new ParseException("MISTAKE", 0);
-    }
-
-    private void parseCandidates() throws XMLStreamException, ParseException {
-        while(streamReader.hasNext()) {
-            eventType = streamReader.next();
-            if(eventType == XMLEvent.START_ELEMENT) {
-                currentElement = streamReader.getTag();
-                seenEndTag = false;
-
-                if(currentElement.equals(CANDIDATE_TAG)) {
-                    if(streamReader.getAttributeValue("selected").equals("yes")) {
-                        word.setLabel(Label.START_OF_TOPONYM);
-                    }
+            if(eventType == XMLEvent.START_ELEMENT && streamReader.getTag().equals(CANDIDATE_TAG)) {
+                if(streamReader.getAttributeValue("selected").equals("yes")) {
+                    toponym.addGeonamesId(streamReader.getAttributeValue("id"));
                 }
             }
-            if(eventType == XMLEvent.END_ELEMENT) {
-                currentElement = streamReader.getTag();
-                seenEndTag = true;
-
-                if(currentElement.equals(TOPONYM_TAG)) {
-                    break;
-                }
+            if(eventType == XMLEvent.END_ELEMENT && streamReader.getTag().equals(TOPONYM_TAG)) {
+                return toponym;
             }
         }
-        throw new ParseException("MISTAKE", 0);
+        throw new ParseException("No endtag for toponym found", 0);
     }
+
 }

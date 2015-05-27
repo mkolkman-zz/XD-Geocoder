@@ -26,9 +26,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EmpericalCrossDomainSvmClassifierTest extends EmpericalClassifierTest {
+public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTest {
 
     MalletSvmClassifierTrainer trainer;
+    private Classifier classifier;
 
     @Override
     @Test
@@ -37,13 +38,15 @@ public class EmpericalCrossDomainSvmClassifierTest extends EmpericalClassifierTe
         ExperimentSetup experimentSetup;
         Map<String, List<LearningInstance>> learningInstances = new HashMap<String, List<LearningInstance>>();
 
-        experimentSetup = new LglExperimentSetup(
+        experimentSetup = new CwarExperimentSetup(
                 new GazetteerFactory(R.GEONAMES_GAZETTEER_FILE),
                 new MaxentTagger(getClass().getResource(R.ENGLISH_TAGGER_MODEL).toString()),
-                new LearningInstanceReader(R.LGL_FEATURE_FILE),
-                new LearningInstanceWriter(R.LGL_FEATURE_FILE)
+                new LearningInstanceReader(R.CWAR_FEATURE_FILE),
+                new LearningInstanceWriter(R.CWAR_FEATURE_FILE)
         );
-        learningInstances.put("LGL", experimentSetup.getLearningInstances(R.LGL_CORPUS_FILE));
+        System.out.println("Importing Cwar");
+        learningInstances.put("CWAR", experimentSetup.getLearningInstances(R.CWAR_CORPUS_FILE));
+        System.out.println("CWar imported");
 
         experimentSetup = new GatExperimentSetup(
                 new GazetteerFactory(R.GEONAMES_GAZETTEER_FILE),
@@ -51,24 +54,50 @@ public class EmpericalCrossDomainSvmClassifierTest extends EmpericalClassifierTe
                 new LearningInstanceReader(R.GAT_FEATURE_FILE),
                 new LearningInstanceWriter(R.GAT_FEATURE_FILE)
         );
+        System.out.println("Importing GAT");
         learningInstances.put("GAT", experimentSetup.getLearningInstances(R.GAT_CORPUS_FILE));
+        System.out.println("GAT imported");
+
+        experimentSetup = new LglExperimentSetup(
+                new GazetteerFactory(R.GEONAMES_GAZETTEER_FILE),
+                new MaxentTagger(getClass().getResource(R.ENGLISH_TAGGER_MODEL).toString()),
+                new LearningInstanceReader(R.LGL_FEATURE_FILE),
+                new LearningInstanceWriter(R.LGL_FEATURE_FILE)
+        );
+        System.out.println("Importing LGL");
+        learningInstances.put("LGL", experimentSetup.getLearningInstances(R.LGL_CORPUS_FILE));
+        System.out.println("LGL imported");
 
         PrintStream out = new PrintStream(new FileOutputStream(R.EXPERIMENT_RESULTS_FILE));
         System.setOut(out);
 
-        String[] trainingList = new String[]{"GAT", "LGL"};
-        String[] testList = new String[]{"GAT", "LGL"};
+        String[] trainingList = new String[]{"CWAR", "GAT", "LGL"};
+        String[] testList = new String[]{"CWAR", "GAT", "LGL"};
 
         for (String training : trainingList) {
-            for (String test : testList) {
-                    super.populateTrainingInstanceList(learningInstances.get(training));
-                    super.populateTestInstanceList(learningInstances.get(test));
+            super.populateTrainingInstanceList(learningInstances.get(training));
+            train();
 
-                    List<Metric> metrics = doExperiment();
-                    System.out.print(training + ", " + test + ", ");
-                    super.printPerformanceMetricsWithoutHeader(metrics);
+            for (String test : testList) {
+                super.populateTestInstanceList(learningInstances.get(test));
+
+                List<Metric> metrics = doExperiment();
+                System.out.print(training + ", " + test + ", ");
+                super.printPerformanceMetricsWithoutHeader(metrics);
             }
         }
+    }
+
+    private void train() {
+        train(0.75, 1, 50, 160, 1);
+    }
+
+    private void train(double gamma, double cost, double weight_b, double weight_i, double weight_o) {
+        trainer = makeClassifierTrainer(makeSvmKernel(gamma, cost));
+
+        svm_parameter params = makeTrainingParams(weight_b, weight_i, weight_o);
+
+        classifier = trainer.train(trainingInstances, params);
     }
 
     public List<Metric> doExperiment() {
@@ -77,12 +106,6 @@ public class EmpericalCrossDomainSvmClassifierTest extends EmpericalClassifierTe
 
     @Override
     public List<Metric> doExperiment(double gamma, double cost, double weight_b, double weight_i, double weight_o) {
-        trainer = makeClassifierTrainer(makeSvmKernel(gamma, cost));
-
-        svm_parameter params = makeTrainingParams(weight_b, weight_i, weight_o);
-
-        Classifier classifier = trainer.train(trainingInstances, params);
-
         Evaluator evaluator = new LglEvaluator(classifier.trial(testInstances));
 
         return evaluator.getPerformanceMetrics();
