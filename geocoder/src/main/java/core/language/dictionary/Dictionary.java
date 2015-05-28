@@ -16,7 +16,7 @@ public interface Dictionary {
 
     int getMentionCount(String word);
 
-    int getToponymCount(String word);
+    int getToponymCount();
 
     int getBeginOfToponymCount(String word);
 

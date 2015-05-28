@@ -69,4 +69,11 @@ public class LglExperimentSetup extends ExperimentSetup {
 
         return new StanfordPosTagger(labelledWords, tagger, new StanfordWordTransformer());
     }
+
+    @Override
+    public void cleanup() {
+        super.cleanup();
+        gazetteerFactory = null;
+        tagger = null;
+    }
 }

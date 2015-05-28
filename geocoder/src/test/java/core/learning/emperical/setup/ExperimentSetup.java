@@ -67,14 +67,15 @@ public abstract class ExperimentSetup {
 
     Dictionary makeDictionary(CorpusReader corpusReader) throws XMLStreamException, FileNotFoundException, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException, ParseException {
         Dictionary dictionary = new HashMapDictionary();
-        int i = 0;
-        while(corpusReader.hasNextDocument()) {
+        for(int i = 0; corpusReader.hasNextDocument(); i++) {
             Document document = corpusReader.getNextDocument();
-            System.out.println("Loading document " + i);
-            i++;
             dictionary.load(makeWordIterator(document));
         }
         return dictionary;
     }
 
+    public void cleanup() {
+        reader = null;
+        writer = null;
+    }
 }

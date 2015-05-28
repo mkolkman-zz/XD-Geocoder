@@ -18,7 +18,7 @@ public class R {
 
     public static final String LGL_CORPUS_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/corpora/LGL/articles.xml";
     public static final String GAT_CORPUS_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/corpora/GAT/mergedAll.csv";
-    public static final String CWAR_CORPUS_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/corpora/CWAR/trconll/dev/cwar-dev.xml";
+    public static final String CWAR_CORPUS_FILE = "/media/mike/780C9AAD0C9A65C2/Studie/corpora/CWAR/trconll/test/cwar-test.xml";
 
     public static final String LGL_FEATURE_FILE = "/home/mike/data/xd_lgl_features.ser";
     public static final String GAT_FEATURE_FILE = "/home/mike/data/xd_gat_features.ser";

@@ -55,4 +55,7 @@ public class LearningInstanceExtractor {
 
     }
 
+    public int getLearningInstanceCount() {
+        return learningInstances.size();
+    }
 }

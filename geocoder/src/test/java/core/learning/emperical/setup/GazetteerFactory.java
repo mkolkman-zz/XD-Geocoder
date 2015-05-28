@@ -2,6 +2,7 @@ package core.learning.emperical.setup;
 
 import core.gazetteer.LocationGazetteer;
 import core.gazetteer.geonames.GeonamesLocationGazetteer;
+import core.language.dictionary.Dictionary;
 import io.gazetteer.csv.CsvGazetteerReader;
 import io.gazetteer.csv.CsvLocationParser;
 

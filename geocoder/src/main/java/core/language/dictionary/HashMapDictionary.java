@@ -87,8 +87,8 @@ public class HashMapDictionary implements Dictionary {
     }
 
     @Override
-    public int getToponymCount(String word) {
-        return 0;
+    public int getToponymCount() {
+        return beginOfToponymCounts.size();
     }
 
     @Override

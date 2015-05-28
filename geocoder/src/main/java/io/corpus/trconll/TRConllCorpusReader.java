@@ -26,7 +26,9 @@ public class TRConllCorpusReader implements CorpusReader {
 
     private int eventType = 0;
 
-    private int wordIndex = 0;
+    private int documentCount = 0;
+
+    private int wordIndex;
 
     public TRConllCorpusReader(XMLStreamReader xmlStreamReader) {
         streamReader = xmlStreamReader;
@@ -37,8 +39,11 @@ public class TRConllCorpusReader implements CorpusReader {
         try {
             while (streamReader.hasNext()) {
                 eventType = streamReader.next();
-
+                if(documentCount > 5) {
+                    return false;
+                }
                 if(eventType == XMLEvent.START_ELEMENT && streamReader.getTag().equals(DOCUMENT_TAG)) {
+                    documentCount++;
                     return true;
                 }
                 if(eventType == XMLEvent.END_ELEMENT && streamReader.getTag().equals(CORPUS_TAG)) {
@@ -64,6 +69,7 @@ public class TRConllCorpusReader implements CorpusReader {
         HistoricDocument document = new HistoricDocument();
         List<Word> words = new ArrayList<Word>();
         List<Toponym> toponyms = new ArrayList<Toponym>();
+        wordIndex = 0;
         while(streamReader.hasNext()) {
             eventType = streamReader.next();
 

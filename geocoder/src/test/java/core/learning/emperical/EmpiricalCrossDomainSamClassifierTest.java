@@ -36,6 +36,36 @@ public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTe
     public void testOnLglCorpus() throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
 
         ExperimentSetup experimentSetup;
+        Map<String, List<LearningInstance>> learningInstances = getCorpora();
+
+        PrintStream out = new PrintStream(new FileOutputStream(R.EXPERIMENT_RESULTS_FILE));
+        System.setOut(out);
+
+        String[] trainingList = new String[]{"CWAR", "GAT", "LGL"};
+        String[] testList = new String[]{"CWAR", "GAT", "LGL"};
+
+
+        for (String training : trainingList) {
+                for (String test : testList) {
+                    List<List<Metric>> metricSums = new ArrayList<List<Metric>>();
+                    for(int iter = 0; iter < 5; iter++) {
+                        super.populateTrainingInstanceList(learningInstances.get(training));
+                        train();
+
+                        super.populateTestInstanceList(learningInstances.get(test));
+                        metricSums.add(doExperiment());
+                    }
+
+                    List<Metric> metrics = calculateAverageMetrics(metricSums);
+
+                    System.out.print(training + ", " + test + ", ");
+                    super.printPerformanceMetricsWithoutHeader(metrics);
+                }
+            }
+        }
+
+    private Map<String, List<LearningInstance>> getCorpora() throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
+        ExperimentSetup experimentSetup;
         Map<String, List<LearningInstance>> learningInstances = new HashMap<String, List<LearningInstance>>();
 
         experimentSetup = new CwarExperimentSetup(
@@ -46,6 +76,7 @@ public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTe
         );
         System.out.println("Importing Cwar");
         learningInstances.put("CWAR", experimentSetup.getLearningInstances(R.CWAR_CORPUS_FILE));
+        experimentSetup.cleanup();
         System.out.println("CWar imported");
 
         experimentSetup = new GatExperimentSetup(
@@ -56,6 +87,7 @@ public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTe
         );
         System.out.println("Importing GAT");
         learningInstances.put("GAT", experimentSetup.getLearningInstances(R.GAT_CORPUS_FILE));
+        experimentSetup.cleanup();
         System.out.println("GAT imported");
 
         experimentSetup = new LglExperimentSetup(
@@ -66,26 +98,9 @@ public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTe
         );
         System.out.println("Importing LGL");
         learningInstances.put("LGL", experimentSetup.getLearningInstances(R.LGL_CORPUS_FILE));
+        experimentSetup.cleanup();
         System.out.println("LGL imported");
-
-        PrintStream out = new PrintStream(new FileOutputStream(R.EXPERIMENT_RESULTS_FILE));
-        System.setOut(out);
-
-        String[] trainingList = new String[]{"CWAR", "GAT", "LGL"};
-        String[] testList = new String[]{"CWAR", "GAT", "LGL"};
-
-        for (String training : trainingList) {
-            super.populateTrainingInstanceList(learningInstances.get(training));
-            train();
-
-            for (String test : testList) {
-                super.populateTestInstanceList(learningInstances.get(test));
-
-                List<Metric> metrics = doExperiment();
-                System.out.print(training + ", " + test + ", ");
-                super.printPerformanceMetricsWithoutHeader(metrics);
-            }
-        }
+        return learningInstances;
     }
 
     private void train() {
@@ -134,6 +149,24 @@ public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTe
         params.weight = new double[]{weightB, weightO, weightI};
         params.nr_weight = 3;
         return params;
+    }
+
+    private List<Metric> calculateAverageMetrics(List<List<Metric>> metricSums) {
+        Map<String, Double> metricTotals = new HashMap<String, Double>();
+        for(List<Metric> metricList : metricSums) {
+            for(Metric metric : metricList) {
+                if( ! metricTotals.containsKey(metric.name)) {
+                    metricTotals.put(metric.name, 0.0);
+                }
+                metricTotals.put(metric.name, metricTotals.get(metric.name) + metric.value);
+            }
+        }
+
+        List<Metric> result = new ArrayList<Metric>();
+        for(Map.Entry<String, Double> entry : metricTotals.entrySet()) {
+            result.add(new Metric(entry.getKey(), (entry.getValue() / metricTotals.size())));
+        }
+        return result;
     }
 
 }

@@ -1,5 +1,7 @@
 package core.learning.emperical.setup;
 
+import core.gazetteer.LocationGazetteer;
+import core.language.dictionary.Dictionary;
 import core.language.document.Document;
 import core.language.labeller.cwar.CwarLabeller;
 import core.language.pos.stanford.StanfordPosTagger;
@@ -36,17 +38,32 @@ public class CwarExperimentSetup extends ExperimentSetup {
 
     @Override
     List<LearningInstance> extractLearningInstances(String corpusFile) throws Exception, XMLStreamReaderFactory.UnsupportedStreamReaderTypeException {
-        CorpusReader corpusReader = makeCorpusReader(corpusFile);
 
-        FeatureExtractor featureExtractor = new FeatureExtractor(makeDictionary(makeCorpusReader(corpusFile)), gazetteerFactory.getGazetteer());
+        Runtime runtime = Runtime.getRuntime();
+        int mb = 1024 * 1024;
+
+        System.out.println("Before dictionary: " + (runtime.totalMemory() - runtime.freeMemory()) / mb + " MB");
+        Dictionary dictionary = makeDictionary(makeCorpusReader(corpusFile));
+        System.out.println("Distinct word count: " + dictionary.getWordCount());
+        System.out.println("Distinct toponym count: " + dictionary.getToponymCount());
+        System.out.println("After dictionary: " + (runtime.totalMemory() - runtime.freeMemory()) / mb + " MB");
+
+        LocationGazetteer gazetteer = gazetteerFactory.getGazetteer();
+        System.out.println("After gazetteer: " + (runtime.totalMemory() - runtime.freeMemory()) / mb + " MB");
+
+        FeatureExtractor featureExtractor = new FeatureExtractor(dictionary, gazetteer);
         LearningInstanceExtractor learningInstanceExtractor = new LearningInstanceExtractor(featureExtractor);
 
-        while(corpusReader.hasNextDocument()) {
+        CorpusReader corpusReader = makeCorpusReader(corpusFile);
+        for(int i = 0; corpusReader.hasNextDocument(); i++) {
 
             Document document = corpusReader.getNextDocument();
             Iterator<Word> wordIterator = makeWordIterator(document, tagger);
 
+            System.out.println("Extracting features for document " + i);
             learningInstanceExtractor.extractLearningInstances(wordIterator);
+            System.out.println("Total word count: " + learningInstanceExtractor.getLearningInstanceCount());
+            System.out.println("Used memory: " + (runtime.totalMemory() - runtime.freeMemory()) / mb + " MB");
         }
 
         return learningInstanceExtractor.getLearningInstances();
@@ -56,7 +73,7 @@ public class CwarExperimentSetup extends ExperimentSetup {
     Iterator<Word> makeWordIterator(Document document) {
         Iterator<Word> tokenizedWords = new StanfordWordTokenizer(new PTBTokenizer(new StringReader(document.getText()), new WordTokenFactory(), ""));
 
-        return new StanfordPosTagger(tokenizedWords, tagger, new StanfordWordTransformer());
+        return new CwarLabeller(tokenizedWords, document.getToponyms());
     }
 
     @Override
@@ -66,5 +83,12 @@ public class CwarExperimentSetup extends ExperimentSetup {
         Iterator<Word> labelledWords = new CwarLabeller(tokenizedWords, document.getToponyms());
 
         return new StanfordPosTagger(labelledWords, tagger, new StanfordWordTransformer());
+    }
+
+    @Override
+    public void cleanup() {
+        super.cleanup();
+        gazetteerFactory = null;
+        tagger = null;
     }
 }

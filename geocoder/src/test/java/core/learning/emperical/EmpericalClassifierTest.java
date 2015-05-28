@@ -6,6 +6,8 @@ import io.corpus.xml.XMLStreamReaderFactory;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,19 +31,20 @@ public abstract class EmpericalClassifierTest {
     protected void populateTestInstanceList(List<LearningInstance> learningInstances) {
         int splitIndex = learningInstances.size() / 10 * 8;
         Collections.shuffle(learningInstances);
-        testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex + 1, learningInstances.size() - 1));
+        testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex, learningInstances.size()));
     }
 
     protected void populateTrainingAndTestInstanceLists(List<LearningInstance> learningInstances) {
         int splitIndex = learningInstances.size() / 10 * 8;
         Collections.shuffle(learningInstances);
         trainingInstances = new ArrayList<LearningInstance>(learningInstances.subList(0, splitIndex));
-        testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex + 1, learningInstances.size() - 1));
+        testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex, learningInstances.size()));
     }
 
     protected void printPerformanceMetricsWithoutHeader(List<Metric> metrics) {
         for (Metric metric : metrics) {
-            System.out.print(metric.value + ", ");
+            BigDecimal bd = new BigDecimal(metric.value).setScale(3, RoundingMode.HALF_EVEN);
+            System.out.print(bd.doubleValue() + ", ");
         }
         System.out.println();
     }
