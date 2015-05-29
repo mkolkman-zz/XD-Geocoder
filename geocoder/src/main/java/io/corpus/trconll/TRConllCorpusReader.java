@@ -4,6 +4,7 @@ import core.language.document.Document;
 import core.language.document.historic.HistoricDocument;
 import core.language.word.Toponym;
 import core.language.word.Word;
+import core.learning.label.Label;
 import io.corpus.CorpusReader;
 import io.corpus.xml.XMLStreamReader;
 
@@ -39,7 +40,7 @@ public class TRConllCorpusReader implements CorpusReader {
         try {
             while (streamReader.hasNext()) {
                 eventType = streamReader.next();
-                if(documentCount > 5) {
+                if(documentCount > 4) {
                     return false;
                 }
                 if(eventType == XMLEvent.START_ELEMENT && streamReader.getTag().equals(DOCUMENT_TAG)) {
@@ -96,7 +97,11 @@ public class TRConllCorpusReader implements CorpusReader {
         word.setStart(wordIndex);
         word.setEnd(wordIndex + tok.length());
 
-        wordIndex+= tok.length();
+        if(streamReader.getAttributeValue("label").equals("in_toponym")) {
+            word.setLabel(Label.IN_TOPONYM);
+        }
+
+        wordIndex+= tok.length() + " ".length();
 
         return word;
     }
@@ -108,7 +113,9 @@ public class TRConllCorpusReader implements CorpusReader {
         word.setStart(wordIndex);
         word.setEnd(wordIndex + term.length());
 
-        wordIndex+= term.length();
+        if(streamReader.getAttributeValue("label").equals("in_toponym")) {
+            word.setLabel(Label.IN_TOPONYM);
+        }
 
         return word;
     }
@@ -119,6 +126,8 @@ public class TRConllCorpusReader implements CorpusReader {
         Toponym toponym = new Toponym(term);
         toponym.setStart(wordIndex);
         toponym.setEnd(wordIndex + term.length());
+
+        wordIndex+= term.length() + " ".length();
 
         while(streamReader.hasNext()) {
             eventType = streamReader.next();

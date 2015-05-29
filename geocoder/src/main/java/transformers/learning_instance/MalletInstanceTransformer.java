@@ -12,6 +12,7 @@ import java.util.List;
 
 public class MalletInstanceTransformer {
 
+    public static final int SENTENCE_LENGTH = 10;
     private MalletFeatureVectorTransformer featureVectorTransformer;
 
     public MalletInstanceTransformer(MalletFeatureVectorTransformer featureVectorTransformer) {
@@ -38,7 +39,7 @@ public class MalletInstanceTransformer {
             Label label = MalletLabelAlphabet.getMalletLabel(input.get(i).getLabel().toString());
             labelList.add(label);
 
-            if(i % 10 == 0 && featureVectorList.size() > 0) {
+            if(i % SENTENCE_LENGTH == 0 && featureVectorList.size() > 0) {
                 FeatureVector[] featureVectorArray = featureVectorList.toArray(new FeatureVector[featureVectorList.size()]);
                 FeatureVectorSequence featureVectorSequence = new FeatureVectorSequence(featureVectorArray);
 

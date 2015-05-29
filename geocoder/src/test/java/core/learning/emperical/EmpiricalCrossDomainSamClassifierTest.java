@@ -4,12 +4,15 @@ import ca.uwo.csd.ai.nlp.kernel.CustomKernel;
 import ca.uwo.csd.ai.nlp.kernel.LinearKernel;
 import ca.uwo.csd.ai.nlp.kernel.RBFKernel;
 import ca.uwo.csd.ai.nlp.libsvm.svm_parameter;
+import cc.mallet.types.LabelAlphabet;
 import core.learning.classifier.Classifier;
 import core.learning.classifier.svm.MalletSvmClassifierTrainer;
 import core.learning.emperical.setup.*;
 import core.learning.evaluator.Evaluator;
 import core.learning.evaluator.Metric;
 import core.learning.evaluator.lgl.LglEvaluator;
+import core.learning.label.Label;
+import core.learning.label.alphabet.MalletLabelAlphabet;
 import core.learning.learning_instance.LearningInstance;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 import io.corpus.xml.XMLStreamReaderFactory;
@@ -47,16 +50,17 @@ public class EmpiricalCrossDomainSamClassifierTest extends EmpericalClassifierTe
 
         for (String training : trainingList) {
                 for (String test : testList) {
-                    List<List<Metric>> metricSums = new ArrayList<List<Metric>>();
-                    for(int iter = 0; iter < 5; iter++) {
+//                    List<List<Metric>> metricSums = new ArrayList<List<Metric>>();
+//                    for(int iter = 0; iter < 5; iter++) {
                         super.populateTrainingInstanceList(learningInstances.get(training));
                         train();
 
                         super.populateTestInstanceList(learningInstances.get(test));
-                        metricSums.add(doExperiment());
-                    }
-
-                    List<Metric> metrics = calculateAverageMetrics(metricSums);
+                        List<Metric> metrics = doExperiment();
+//                        metricSums.add(doExperiment());
+//                    }
+//
+//                    List<Metric> metrics = calculateAverageMetrics(metricSums);
 
                     System.out.print(training + ", " + test + ", ");
                     super.printPerformanceMetricsWithoutHeader(metrics);

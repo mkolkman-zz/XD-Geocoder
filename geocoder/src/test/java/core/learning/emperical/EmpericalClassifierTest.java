@@ -1,5 +1,6 @@
 package core.learning.emperical;
 
+import core.learning.label.Label;
 import core.learning.learning_instance.LearningInstance;
 import core.learning.evaluator.Metric;
 import io.corpus.xml.XMLStreamReaderFactory;
@@ -26,12 +27,18 @@ public abstract class EmpericalClassifierTest {
         int splitIndex = learningInstances.size() / 10 * 8;
         Collections.shuffle(learningInstances);
         trainingInstances = new ArrayList<LearningInstance>(learningInstances.subList(0, splitIndex));
+
+        LearningInstance learningInstance = new LearningInstance(learningInstances.get(0).getWord(), learningInstances.get(0).getFeatures(), Label.IN_TOPONYM);
+        trainingInstances.add(learningInstance);
     }
 
     protected void populateTestInstanceList(List<LearningInstance> learningInstances) {
         int splitIndex = learningInstances.size() / 10 * 8;
         Collections.shuffle(learningInstances);
         testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex, learningInstances.size()));
+
+        LearningInstance learningInstance = new LearningInstance(learningInstances.get(0).getWord(), learningInstances.get(0).getFeatures(), Label.IN_TOPONYM);
+        testInstances.add(learningInstance);
     }
 
     protected void populateTrainingAndTestInstanceLists(List<LearningInstance> learningInstances) {
@@ -39,6 +46,10 @@ public abstract class EmpericalClassifierTest {
         Collections.shuffle(learningInstances);
         trainingInstances = new ArrayList<LearningInstance>(learningInstances.subList(0, splitIndex));
         testInstances = new ArrayList<LearningInstance>(learningInstances.subList(splitIndex, learningInstances.size()));
+
+        LearningInstance learningInstance = new LearningInstance(learningInstances.get(0).getWord(), learningInstances.get(0).getFeatures(), Label.IN_TOPONYM);
+        trainingInstances.add(learningInstance);
+        testInstances.add(learningInstance);
     }
 
     protected void printPerformanceMetricsWithoutHeader(List<Metric> metrics) {
